@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div style="margin-top: 80px">
+    <div style="margin-top: 500px">
       <b-row align-h="center">
         <b-col cols="4">
-          <b-card title="로그인">
+          <b-card class="login">
+            <h3 align="center">로그인</h3>
             <b-form-group label-cols="4" label-cols-lg="3" label="아이디" label-for="input-userid">
               <b-form-input id="input-userid" v-model="userid"></b-form-input>
             </b-form-group>
@@ -11,16 +12,20 @@
               <b-form-input id="input-password" v-model="password" type="password"></b-form-input>
             </b-form-group>
             <b-form-group label-cols="4" label-cols-lg="3" label="">
-              <b-button variant="primary" :disabled="loading" @click="onSubmit"
+              <b-button style="btn" :disabled="loading" @click="onSubmit"
                 ><b-spinner v-if="loading" small></b-spinner> 로그인</b-button
               >
             </b-form-group>
+            <div id="formFooter">
+            <div align="center" href="#">회원가입하기</div>
+            </div>
           </b-card>
         </b-col>
       </b-row>
     </div>
   </div>
 </template>
+
 
 <script>
 import jwtDecode from 'jwt-decode'
@@ -86,4 +91,24 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+body {
+  background-image: url('~@/assets/images/1.jpg');
+  background-size : cover;
+  background-repeat : no-repeat;
+  background-position : center;
+  background-attachment : fixed;
+}
+.login {
+  border-radius: 20px;
+  /* background-color: #D4ECDD; */
+  box-shadow: 8px 8px 5px #625a5a;
+  
+}
+.btn {
+  background-color: #d11541;
+  border: none;
+  background-position : center;
+
+}
+</style>
