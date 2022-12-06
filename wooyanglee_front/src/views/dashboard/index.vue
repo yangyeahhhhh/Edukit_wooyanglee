@@ -78,26 +78,26 @@ export default {
 
       mqttClient.on('connect', () => {
         // mqtt연결 시 구독한다.
-        // const topic = 'metacamp/sensor' // 구독할 topic
-        // mqttClient.subscribe(topic, {}, (error, res) => {
-        //   if (error) {
-        //     console.error('mqtt client error', error)
-        //   }
-        // })
+        const topic = 'metacamp/sensor' // 구독할 topic
+        mqttClient.subscribe('myEdukit', {}, (error, res) => {
+          if (error) {
+            console.error('mqtt client error', error)
+          }
+        })
       })
 
       // 메세지 실시간 수신
       mqttClient.on('message', (topic, message) => {
         const mqttData = JSON.parse(message) // json string으로만 받을 수 있음
-        // console.log(mqttData.temperature)
+        console.log(mqttData)
 
         // 선택된 devicdId만 수용함
-        this.removeOldData() // 오래된 데이터 제거
+        // this.removeOldData() // 오래된 데이터 제거
 
-        this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
+        // this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
 
-        this.makeChartLabels(mqttData) // 차트라벨 생성
-        this.makeChartData() // 차트용 데이터 작성
+        // this.makeChartLabels(mqttData) // 차트라벨 생성
+        // this.makeChartData() // 차트용 데이터 작성
 
         // if (this.selected.deviceId === mqttData.id) {
         //   this.removeOldData() // 오래된 데이터 제거
