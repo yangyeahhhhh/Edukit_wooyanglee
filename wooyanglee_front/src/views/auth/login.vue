@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="top"></div>
     <div class="login-page" ng-app="">
       <div class="login-content login-content-signin" ng-hide="showSignIn">
         <div>
           <h2>Log in</h2>
+          <div><br /></div>
           <form class="wrapper-box" role="form" ng-submit="login()">
             <input v-model="userid" type="id" class="form-control form-control-email" placeholder="아이디" required />
             <input
@@ -15,11 +15,9 @@
               required
             />
             <!-- <div class="checkbox pull-left">
-          <label>
-            <input type="checkbox"> Remember me.
-          </label>
-        </div> -->
-            <a class="outer-link pull-left" href="#/forgot">Forgot Password</a>
+              <label> <input type="checkbox" /> Remember me. </label>
+            </div> -->
+            <div><br /><br /></div>
             <button :disabled="loading" type="submit" @click="onSubmit">Login</button>
           </form>
         </div>
@@ -93,13 +91,13 @@ export default {
 </script>
 
 <style>
-/* /* top {
-  background-image: url('~@/assets/images/1.jpg');
+.top {
+  background-image: url('~@/assets/images/1.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-} */
+}
 
 .login-page {
   position: absolute;
@@ -108,12 +106,16 @@ export default {
   top: 0;
   left: 0;
   background: #fff;
+  background-image: url('~@/assets/images/1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .login-content {
-  width: 420px;
+  width: 450px;
   padding: 40px;
-  height: 500px;
+  height: 400px;
   top: 50%;
+  margin-top: 40px;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -126,22 +128,6 @@ export default {
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
   transition-delay: 0.2s;
-}
-.login-content-signin.ng-hide:not(.ng-hide-animate) {
-  transition-delay: 0s;
-  display: block !important;
-  opacity: 0;
-  z-index: -1;
-  -webkit-transform: translate(-45%, -50%);
-  transform: translate(-45%, -50%);
-}
-.login-content-signup.ng-hide:not(.ng-hide-animate) {
-  transition-delay: 0s;
-  display: block !important;
-  opacity: 0;
-  z-index: -1;
-  -webkit-transform: translate(-55%, -50%);
-  transform: translate(-55%, -50%);
 }
 h2 {
   text-align: left;
