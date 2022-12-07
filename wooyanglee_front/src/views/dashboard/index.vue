@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>대시보드</h1>
+    <h1>DASHBOARD</h1>
     <div>장비: {{ selected.deviceName }}</div>
     <div>태그: {{ selected.tagList }}</div>
     <div v-if="chartData">
