@@ -157,25 +157,6 @@ input {
     :-moz-placeholder { color: rgba(0,0,0,0.5); }
     ::-moz-placeholder { color: rgba(0,0,0,0.5); }
     :-ms-input-placeholder { color: rgba(0,0,0,0.5); } */
-button {
-  display: inline-block;
-  margin-top: 50px;
-  border: 2px solid #7ac142;
-  background: #7ac142;
-  border-radius: 25px;
-  padding: 3px 12px 5px 12px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 0px;
-  -webkit-transition: all 0.1s ease-out;
-  transition: all 0.1s ease-out;
-}
-button:hover {
-  color: #7ac142;
-  background: #fff;
-  border: 2px solid #7ac142;
-}
 .outer-link {
   display: inline-block;
   margin-top: 50px;
@@ -223,6 +204,7 @@ h3 {
   font-size: 14px;
 }
 button {
+  width: 60%;
   display: block;
   margin: 20px auto 0 auto;
   outline: 0;
@@ -235,10 +217,11 @@ button {
   padding: 4px 12px 5px 12px;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
-  /* &:hover {
-        border: 2px solid @green !important;
-        color: rgba(0,0,0,0.8);
-      } */
+}
+button:hover {
+  color: #7ac142;
+  background: #fff;
+  border: 2px solid #7ac142;
 }
 .login-switcher-signin,
 .login-switcher-signup {
