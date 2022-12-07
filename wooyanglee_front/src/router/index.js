@@ -55,6 +55,21 @@ const routes = [
     component: () => import('../views/edukit.vue')
   },
   {
+    path: '/department',
+    name: 'department',
+    component: () => import('../views/department.vue')
+  },
+  {
+    path: '/materials',
+    name: 'materials',
+    component: () => import('../views/materials.vue')
+  },
+  {
+    path: '/stock',
+    name: 'stock',
+    component: () => import('../views/stock.vue')
+  },
+  {
     path: '*',
     component: () => import('../components/NotFound.vue'),
     meta: { header: false }
