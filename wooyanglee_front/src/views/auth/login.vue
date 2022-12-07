@@ -150,13 +150,7 @@ input {
   box-shadow: none;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
-  /* &:valid { border-bottom: 1px solid #7ac142; } */
-  /* &:focus:invalid { border-bottom: 1px solid #EF6161; } */
 }
-/* ::-webkit-input-placeholder { color: rgba(0,0,0,0.5); }
-    :-moz-placeholder { color: rgba(0,0,0,0.5); }
-    ::-moz-placeholder { color: rgba(0,0,0,0.5); }
-    :-ms-input-placeholder { color: rgba(0,0,0,0.5); } */
 .outer-link {
   display: inline-block;
   margin-top: 50px;
@@ -172,16 +166,6 @@ outer-link:hover {
   color: rgba(0, 0, 0, 0.8);
   text-decoration: none;
 }
-/* &.login-content-signin > div,
-  &.login-content-signup > div {
-    overflow: hidden;
-    top: 50%;
-    position: relative;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-  }
-  &.login-content-signin { margin-left: -130px; }
-  &.login-content-signup { margin-left: 130px; } */
 .login-switcher {
   position: absolute;
   top: 0;
@@ -192,11 +176,6 @@ outer-link:hover {
   width: 660px;
   height: 400px;
   box-shadow: 0 0px 20px rgba(0, 0, 0, 0.03);
-  /* & > div {
-    width: 40%;
-    margin-top: 125px;
-    &.login-switcher-signin { float: left; }
-    &.login-switcher-signup { float: right; } */
 }
 h3 {
   color: rgba(0, 0, 0, 0.4);
