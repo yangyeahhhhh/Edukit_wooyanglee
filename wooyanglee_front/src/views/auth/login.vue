@@ -17,7 +17,7 @@
               >
             </b-form-group>
             <div id="formFooter">
-            <div align="center" href="#">회원가입하기</div>
+              <div align="center" href="#">회원가입하기</div>
             </div>
           </b-card>
         </b-col>
@@ -25,7 +25,6 @@
     </div>
   </div>
 </template>
-
 
 <script>
 import jwtDecode from 'jwt-decode'
@@ -94,21 +93,19 @@ export default {
 <style>
 body {
   background-image: url('~@/assets/images/1.jpg');
-  background-size : cover;
-  background-repeat : no-repeat;
-  background-position : center;
-  background-attachment : fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 .login {
   border-radius: 20px;
   /* background-color: #D4ECDD; */
   box-shadow: 8px 8px 5px #625a5a;
-  
 }
 .btn {
   background-color: #d11541;
   border: none;
-  background-position : center;
-
+  background-position: center;
 }
 </style>
