@@ -11,19 +11,19 @@
           </div>
         </li>
         <li @click="$router.push('/department')">
-          <div class="about-icon">
-            <div class="head">
-              <div class="eyes"></div>
-              <div class="beard"></div>
-            </div>
-          </div>
-        </li>
-        <li @click="$router.push('/user')">
           <div class="work-icon">
             <div class="paper"></div>
             <div class="lines"></div>
             <div class="lines"></div>
             <div class="lines"></div>
+          </div>
+        </li>
+        <li @click="$router.push('/user')">
+          <div class="about-icon">
+            <div class="head">
+              <div class="eyes"></div>
+              <div class="beard"></div>
+            </div>
           </div>
         </li>
         <li @click="$router.push('/edukit')">
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style scoped>
@@ -50,7 +50,7 @@ export default {}
 }
 
 :after {
-  content: '';
+  content: "";
 }
 
 section {
@@ -61,9 +61,10 @@ section {
 h1 {
   margin: 80px 0 10px 0;
   font-size: 52px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
-  text-shadow: 1px 1px 0px #dc143c, 2px 2px 0px #dc143c, 3px 3px 0px #dc143c, 4px 4px 0px #dc143c;
+  text-shadow: 1px 1px 0px #dc143c, 2px 2px 0px #dc143c, 3px 3px 0px #dc143c,
+    4px 4px 0px #dc143c;
 }
 
 h2 {
@@ -75,7 +76,7 @@ body {
   background: lightblue;
   color: white;
   max-width: 640px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 14px;
   line-height: 1.4;
 }
@@ -116,19 +117,19 @@ nav ul li:after {
 }
 
 nav ul li:nth-child(1):after {
-  content: '대시보드';
+  content: "대시보드";
   line-height: 88px;
 }
 nav ul li:nth-child(2):after {
-  content: '작업내역';
+  content: "작업내역";
   line-height: 88px;
 }
 nav ul li:nth-child(3):after {
-  content: '직원관리';
+  content: "직원관리";
   line-height: 88px;
 }
 nav ul li:nth-child(4):after {
-  content: '모니터링';
+  content: "모니터링";
   line-height: 88px;
 }
 
