@@ -90,7 +90,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .top {
   background-image: url('~@/assets/images/1.png');
   background-size: cover;
