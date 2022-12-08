@@ -8,7 +8,7 @@
           <app-sidebar />
         </b-col>
         <!-- Body contents -->
-        <b-col style="padding-left: 0px; padding-right: 0px; margin-left: -180px">
+        <b-col class="body">
           <div class="content-body">
             <router-view />
           </div>
@@ -19,13 +19,18 @@
 </template>
 
 <script>
-import Sidebar from '../components/layout/Sidebar'
+import Sidebar from "../components/layout/Sidebar";
 
 export default {
   components: {
-    'app-sidebar': Sidebar
-  }
-}
+    "app-sidebar": Sidebar,
+  },
+};
 </script>
 
-<style lang="scss" scoped></style>
+<style>
+.body {
+  position: absolute;
+  margin-left: 70px;
+}
+</style>
