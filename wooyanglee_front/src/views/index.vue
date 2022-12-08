@@ -8,7 +8,7 @@
           <app-sidebar />
         </b-col>
         <!-- Body contents -->
-        <b-col style="padding-left: 0px; padding-right: 0px">
+        <b-col style="padding-left: 0px; padding-right: 0px; margin-left: -180px">
           <div class="content-body">
             <router-view />
           </div>
