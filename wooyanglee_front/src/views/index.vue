@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import Sidebar from "../components/layout/Sidebar";
+import Sidebar from '../components/layout/Sidebar'
 
 export default {
   components: {
-    "app-sidebar": Sidebar,
-  },
-};
+    'app-sidebar': Sidebar
+  }
+}
 </script>
 
 <style>
