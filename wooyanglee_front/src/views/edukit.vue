@@ -8,18 +8,18 @@
 </template>
 
 <script>
-import Three from "../example";
-import Sidebar from "../components/layout/Sidebar";
+import Three from '../example'
+import Sidebar from '../components/layout/Sidebar'
 
 export default {
   components: {
-    "app-sidebar": Sidebar,
+    'app-sidebar': Sidebar
   },
   mounted() {
-    console.log(this.$refs.webgl);
-    Three(this.$refs.webgl);
-  },
-};
+    console.log(this.$refs.webgl)
+    Three(this.$refs.webgl)
+  }
+}
 </script>
 
 <style></style>
