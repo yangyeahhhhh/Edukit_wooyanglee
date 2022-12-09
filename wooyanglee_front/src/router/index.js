@@ -19,10 +19,10 @@ const routes = [
         path: '/dashboard',
         component: () => import('../views/dashboard')
       },
-      // {
-      //   path: '/department',
-      //   component: () => import('../views/department')
-      // },
+      {
+        path: '/edukit',
+        component: () => import('../views/edukit')
+      },
       {
         path: '/user',
         component: () => import('../views/user')
@@ -48,11 +48,6 @@ const routes = [
         meta: { header: false, noLogin: true }
       }
     ]
-  },
-  {
-    path: '/edukit',
-    name: 'edukit',
-    component: () => import('../views/edukit.vue')
   },
   {
     path: '/department',
