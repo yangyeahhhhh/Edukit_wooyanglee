@@ -40,7 +40,7 @@ module.exports = class User extends Sequelize.Model {
     });
   }
 
-  static associate(db) {
-    // db.User.belongsTo(db.Department, { foreignKey: { name: 'departmentId', onDelete: 'SET NULL', as: 'Department' } });
-  }
+  // static associate(db) {
+  //   db.User.belongsTo(db.Department, { foreignKey: { name: 'departmentId', onDelete: 'SET NULL', as: 'Department' } });
+  // }
 };
