@@ -8,6 +8,7 @@ const cors = require('cors');
 const corsConfig = require('./config/corsConfig.json');
 const models = require('./models/index');
 const logger = require('./lib/logger');
+const mqtt = require('./dao/mqtt');
 
 const indexRouter = require('./routes/index');
 // const usersRouter = require('./routes/users'); // 구코드 삭제
