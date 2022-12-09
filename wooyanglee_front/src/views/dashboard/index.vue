@@ -78,7 +78,7 @@ export default {
 
       mqttClient.on('connect', () => {
         // mqtt연결 시 구독한다.
-        const topic = 'metacamp/sensor' // 구독할 topic
+        const topic = 'myEdukit' // 구독할 topic
         mqttClient.subscribe('myEdukit', {}, (error, res) => {
           if (error) {
             console.error('mqtt client error', error)
