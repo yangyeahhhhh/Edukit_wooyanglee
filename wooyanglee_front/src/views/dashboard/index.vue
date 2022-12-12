@@ -9,7 +9,9 @@
   <div class="grid-container">
     <div class="grid-time"></div>
     <div class="grid-chart">
-      <div class="grid-chart2" v-if="chartData"></div>
+      <div v-if="chartData">
+        <line-chart ref="chart" :chart-data="chartData" :options="options" style="width: 500px"></line-chart>
+      </div>
       <div class="grid-state">
         <div class="grid-state2"></div>
         <div class="grid-state2"></div>
@@ -34,7 +36,7 @@ export default {
         // 선택된 장비 정보
         tagId: 21, // TODO: 현재 화면에서 사용할 장비ID(선택 가능하도록 변경하도록 한다.)
         name: 'No3Motor1', // TODO: 현재 화면에서 출력할 장비이름(deviceId선택 시 자동 세팅되도록 한다.)
-        tagList: ['value'] // TODO: 현재 화면에서 출력할 태그 이름(deviceId선택 시 해당 장비의 태그를 설정할 수 있도록 한다.),
+        tagList: ['양품수'] // TODO: 현재 화면에서 출력할 태그 이름(deviceId선택 시 해당 장비의 태그를 설정할 수 있도록 한다.),
         // tagList: ['tag1', 'tag2'] // TODO: 현재 화면에서 출력할 태그 이름(deviceId선택 시 해당 장비의 태그를 설정할 수 있도록 한다.)
       },
       options: {
@@ -100,9 +102,9 @@ export default {
       // 메세지 실시간 수신
       mqttClient.on('message', (topic, message) => {
         const mqttData = JSON.parse(message) // json string으로만 받을 수 있음
-        console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨! 
-															// 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
-        console.log(mqttData.Wrapper[34].value) // 나나 // 3호기 x축값 예상
+        console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨!
+        // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
+        console.log(mqttData.Wrapper[33].value) // 나나 // 3호기 x축값 예상
         // console.log(mqttData.Wrapper[40].name) // 나나 // DataTime 예상
 
         // 선택된 devicdId만 수용함
@@ -160,8 +162,8 @@ export default {
     },
     makeChartLabels(mqttData) {
       // 차트라벨(가로측) 생성
-      this.chartLabels.push(mqttData.Wrapper[40].value.substring(12, 20)) 
-																						// datetime을 사용한다.(분:초만 추출함)
+      this.chartLabels.push(mqttData.Wrapper[40].value.substring(12, 20))
+      // datetime을 사용한다.(분:초만 추출함)
     },
     makeDatasetDatas() {
       // 데이터셋의 데이터 추출
@@ -175,7 +177,7 @@ export default {
         for (let j = 0; j < this.mqttDataList.length; j += 1) {
           const mqttData = this.mqttDataList[j]
           // const tagData = mqttData[label] // 현재 데이터셋 label과 같은 태그만 추출한다.
-          const tagData = mqttData.Wrapper[34].value // 현재 데이터셋 label과 같은 태그만 추출한다.
+          const tagData = mqttData.Wrapper[33].value // 현재 데이터셋 label과 같은 태그만 추출한다.
           datas.push(tagData)
         }
         datasetDatas.push({
@@ -185,7 +187,7 @@ export default {
         })
       }
       return datasetDatas.map((item, idx) => {
-        const color = idx === 0 ? '#1B9CFC' : '#e74c3c'
+        const color = idx === 0 ? '#e74c3c' : '#3ce753'
         return { ...item, borderColor: color }
       })
     }
@@ -194,35 +196,33 @@ export default {
 </script>
 
 <style>
-.grid-container{
+.grid-container {
   display: grid;
   width: 1425px;
   grid-template-rows: 70px 515px;
   grid-gap: 10px;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
-.grid-time{
+.grid-time {
   width: 1425px;
   background-color: blueviolet;
   grid-gap: 10px;
 }
-.grid-chart{
+.grid-chart {
   display: grid;
   width: 1000px;
-  background-color: blue;
+  /* background-color: blue; */
   grid-template-columns: 1000px 650px;
   grid-gap: 10px;
-
 }
-.grid-state{
+.grid-state {
   display: grid;
   width: 415px;
   background-color: red;
   grid-gap: 10px;
 }
-.grid-state2{
+.grid-state2 {
   grid-template-rows: 20% 20% 20% 20%;
   background-color: darkgoldenrod;
-
 }
 </style>
