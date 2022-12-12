@@ -12,10 +12,43 @@
         <line-chart ref="chart" :chart-data="chartData" :options="options" style="width: 500px"></line-chart>
       </div>
       <div class="grid-state">
-        <div class="grid-state2"></div>
-        <div class="grid-state2"></div>
-        <div class="grid-state2"></div>
-        <div class="grid-state2"></div>
+        <div class="grid-state2 inline">
+          <h6>전원 상태</h6>
+          <div>
+            1호기
+            <p>
+              {{ plc.power1 === true ? 'ON' : 'OFF' }}
+              <span class="toggle">
+                <input id="toggle1" v-model="plc.power1" type="checkbox" />
+                <label for="toggle1"></label>
+              </span>
+            </p>
+          </div>
+
+          <div>
+            2호기
+            <p>
+              {{ plc.power2 === true ? 'ON' : 'OFF' }}
+              <span class="toggle">
+                <input id="toggle2" v-model="plc.power2" type="checkbox" />
+                <label for="toggle2"></label>
+              </span>
+            </p>
+          </div>
+          <div>
+            3호기
+            <p>
+              {{ plc.power3 === true ? 'ON' : 'OFF' }}
+              <span class="toggle">
+                <input id="toggle3" v-model="plc.power3" type="checkbox" />
+                <label for="toggle3"></label>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="grid-state2">공정 진행 상태</div>
+        <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div>
+        <div class="grid-state2">00월 00일 누적생산량</div>
       </div>
     </div>
   </div>
@@ -69,6 +102,15 @@ export default {
           ]
         }
       },
+      plc: {
+        // 1호기 & 2호기 & 3호기 전원 데이터
+        power1: null,
+        power2: null,
+        power3: null,
+        defect: null,
+        normal: null,
+        sensor2: null
+      },
       maxDataLength: 20, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
       mqttDataList: [], // mqtt를 통해 받은 데이터(리스트로 계속 추가됨)
       chartData: null, // 차트로 표현될 데이터
@@ -105,6 +147,26 @@ export default {
         // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
         console.log(mqttData.Wrapper[33].value) // 나나 // 3호기 x축값 예상
         // console.log(mqttData.Wrapper[40].name) // 나나 // DataTime 예상
+
+        // 1호기 & 2호기 & 3호기 전원 데이터
+        let powerData = mqttData.Wrapper.filter(p => p.tagId === '9' || p.tagId === '10' || p.tagId === '11')
+        this.plc.power1 = powerData[0].value
+        this.plc.power2 = powerData[1].value
+        this.plc.power3 = powerData[2].value
+        //양품 & 불량품 데이터
+        let goodsData = mqttData.Wrapper.filter(
+          p => p.tagId === '17' || p.tagId === '15' || p.tagId === '16' || p.tagId === '24'
+        )
+        console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', goodsData)
+        this.plc.sensor2 = goodsData[0].value
+        this.plc.normal = goodsData[3].value
+        let defectValue
+        if (this.plc.sensor2 == true) {
+          defectValue = goodsData[1].value - goodsData[2].value
+        } else {
+          defectValue = '불량품검수중'
+        }
+        this.plc.defect = defectValue
 
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거
@@ -217,11 +279,15 @@ export default {
 .grid-state {
   display: grid;
   width: 415px;
-  background-color: red;
+  /* background-color: red; */
   grid-gap: 10px;
 }
 .grid-state2 {
   grid-template-rows: 20% 20% 20% 20%;
-  background-color: darkgoldenrod;
+  background-color: #eee;
+}
+.inline div {
+  display: inline-block;
+  padding: 15px;
 }
 </style>
