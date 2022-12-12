@@ -1,13 +1,12 @@
 <template>
   <!-- <div class="grid-container">
-      <div class="grid-time">0000. 00. 00. 00:00:00</div>
       <div v-if="chartData">
       <div class="grid-chart"></div>
       <div></div>
       <line-chart ref="chart" :chart-data="chartData" :options="options" style="width: 800px"></line-chart></div>
   </div> -->
   <div class="grid-container">
-    <div class="grid-time"></div>
+    <div class="grid-time">0000. 00. 00. 00:00:00</div>
     <div class="grid-chart">
       <div class="grid-chart2" v-if="chartData"></div>
       <div class="grid-state">
