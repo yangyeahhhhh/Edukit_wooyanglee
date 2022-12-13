@@ -28,8 +28,8 @@ const routes = [
         component: () => import('../views/user')
       },
       {
-        path: '/department',
-        component: () => import('../views/department')
+        path: '/historylog',
+        component: () => import('../views/historylog')
       }
     ]
   },

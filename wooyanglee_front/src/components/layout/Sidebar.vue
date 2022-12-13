@@ -10,7 +10,7 @@
             <div class="front"></div>
           </div>
         </li>
-        <li @click="$router.push('/department')">
+        <li @click="$router.push('/historylog')">
           <div class="work-icon">
             <div class="paper"></div>
             <div class="lines"></div>
