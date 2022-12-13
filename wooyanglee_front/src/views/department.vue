@@ -1,21 +1,15 @@
 <template>
   <div>
-    <h1>사용자 관리</h1>
-    <div style="margin-bottom: 5px">
-      <b-row>
-        <b-col style="text-align: left" cols="3">
-          <b-input-group class="mt-3">
-            <b-form-input v-model="search.name" placeholder="이름 검색"></b-form-input>
-            <b-form-input v-model="search.userid" placeholder="아이디 검색"></b-form-input>
-            <b-input-group-append>
-              <b-button variant="primary" size="sm" @click="searchUserList">검색</b-button>
-            </b-input-group-append>
-          </b-input-group>
-        </b-col>
-        <b-col style="text-align: right">
-          <b-button variant="success" size="sm" @click="onClickAddNew">신규등록</b-button>
-        </b-col>
-      </b-row>
+    <h1>작업 내역</h1>
+    <div class="parent" style="margin-bottom: 5px">
+      <div class="calendar1">시작날짜
+      &nbsp; <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m5 1032.4c-1.1046 0-2 0.9-2 2v14c0 1.1 0.8954 2 2 2h6 2 6c1.105 0 2-0.9 2-2v-14c0-1.1-0.895-2-2-2h-6-2-6z" fill="#bdc3c7"/><path d="m5 3c-1.1046 0-2 0.8954-2 2v14c0 1.105 0.8954 2 2 2h6 2 6c1.105 0 2-0.895 2-2v-14c0-1.1046-0.895-2-2-2h-6-2-6z" fill="#ecf0f1" transform="translate(0 1028.4)"/><path d="m5 1031.4c-1.1046 0-2 0.9-2 2v3h18v-3c0-1.1-0.895-2-2-2h-6-2-6z" fill="#e74c3c"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(.5 1028.4)"/><path d="m6 1c-0.5523 0-1 0.4477-1 1v3c0 0.5523 0.4477 1 1 1s1-0.4477 1-1v-3c0-0.5523-0.4477-1-1-1z" fill="#bdc3c7" transform="translate(0 1028.4)"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(12.5 1028.4)"/><g fill="#bdc3c7"><path d="m18 1029.4c-0.552 0-1 0.4-1 1v3c0 0.5 0.448 1 1 1s1-0.5 1-1v-3c0-0.6-0.448-1-1-1z"/><path d="m5 1039.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1042.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1045.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/></g><rect fill="#c0392b" height="1" transform="translate(0 1028.4)" width="18" x="3" y="8"/></g></svg></div>
+      <div class="calendar2">끝날짜
+        &nbsp; <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m5 1032.4c-1.1046 0-2 0.9-2 2v14c0 1.1 0.8954 2 2 2h6 2 6c1.105 0 2-0.9 2-2v-14c0-1.1-0.895-2-2-2h-6-2-6z" fill="#bdc3c7"/><path d="m5 3c-1.1046 0-2 0.8954-2 2v14c0 1.105 0.8954 2 2 2h6 2 6c1.105 0 2-0.895 2-2v-14c0-1.1046-0.895-2-2-2h-6-2-6z" fill="#ecf0f1" transform="translate(0 1028.4)"/><path d="m5 1031.4c-1.1046 0-2 0.9-2 2v3h18v-3c0-1.1-0.895-2-2-2h-6-2-6z" fill="#e74c3c"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(.5 1028.4)"/><path d="m6 1c-0.5523 0-1 0.4477-1 1v3c0 0.5523 0.4477 1 1 1s1-0.4477 1-1v-3c0-0.5523-0.4477-1-1-1z" fill="#bdc3c7" transform="translate(0 1028.4)"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(12.5 1028.4)"/><g fill="#bdc3c7"><path d="m18 1029.4c-0.552 0-1 0.4-1 1v3c0 0.5 0.448 1 1 1s1-0.5 1-1v-3c0-0.6-0.448-1-1-1z"/><path d="m5 1039.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1042.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1045.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/></g><rect fill="#c0392b" height="1" transform="translate(0 1028.4)" width="18" x="3" y="8"/></g></svg>
+      </div>
+      <div class="calendar3">조회
+       <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M10.5 4C7.46243 4 5 6.46243 5 9.5C5 12.5376 7.46243 15 10.5 15C13.5376 15 16 12.5376 16 9.5C16 6.46243 13.5376 4 10.5 4ZM3 9.5C3 5.35786 6.35786 2 10.5 2C14.6421 2 18 5.35786 18 9.5C18 11.6048 17.133 13.507 15.7366 14.8692L20.7372 20.3243C21.1103 20.7314 21.0828 21.364 20.6757 21.7372C20.2686 22.1103 19.636 22.0828 19.2628 21.6757L14.1229 16.0685C13.0489 16.6621 11.8139 17 10.5 17C6.35786 17 3 13.6421 3 9.5Z" fill="black" fill-rule="evenodd"/></svg>
+      </div>
     </div>
     <div>
       <b-table small hover striped :items="userList" :fields="fields">
@@ -49,15 +43,12 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'id', label: 'id' },
-        { key: 'name', label: '이름' },
-        { key: 'Department', label: '부서' },
-        { key: 'userid', label: '아이디' },
-        { key: 'role', label: '권한' },
-        { key: 'email', label: '이메일' },
-        { key: 'createdAt', label: '생성일' },
-        { key: 'updateBtn', label: '수정' },
-        { key: 'deleteBtn', label: '삭제' }
+        { key: 'number', label: '번호' },
+        { key: 'date', label: '날짜' },
+        { key: 'normal', label: '양품개수' },
+        { key: 'defect', label: '불량품개수' },
+        { key: 'total', label: '총생산량' },
+        { key: 'user', label: '작업자' },
       ],
       search: {
         name: null,
@@ -79,125 +70,38 @@ export default {
       return this.$store.getters.UserDeletedResult
     }
   },
-  watch: {
-    insertedResult(value) {
-      // 등록 후 처리
-
-      if (value !== null) {
-        if (value > 0) {
-          // 등록이 성공한 경우
-
-          // 1. 메세지 출력
-          this.$bvToast.toast('등록 되었습니다.', {
-            title: 'SUCCESS',
-            variant: 'success',
-            solid: true
-          })
-
-          // 2. 리스트 재 검색
-          this.searchUserList()
-        } else {
-          // 등록이 실패한 경우
-          this.$bvToast.toast('등록이 실패하였습니다.', {
-            title: 'ERROR',
-            variant: 'danger',
-            solid: true
-          })
-        }
-      }
-    },
-    updatedResult(value) {
-      // 수정 후 처리
-      if (value !== null) {
-        if (value > 0) {
-          // 수정이 성공한 경우
-
-          // 1. 메세지 출력
-          this.$bvToast.toast('수정 되었습니다.', {
-            title: 'SUCCESS',
-            variant: 'success',
-            solid: true
-          })
-
-          // 2. 리스트 재 검색
-          this.searchUserList()
-        } else {
-          // 수정이 실패한 경우
-          this.$bvToast.toast('수정이 실패하였습니다.', {
-            title: 'ERROR',
-            variant: 'danger',
-            solid: true
-          })
-        }
-      }
-    },
-    deletedResult(value) {
-      // 삭제 후 처리
-      if (value !== null) {
-        if (value > 0) {
-          // 삭제가 성공한 경우
-
-          // 1. 메세지 출력
-          this.$bvToast.toast('삭제 되었습니다.', {
-            title: 'SUCCESS',
-            variant: 'success',
-            solid: true
-          })
-
-          // 2. 리스트 재 검색
-          this.searchUserList()
-        } else {
-          // 삭제가 실패한 경우
-          this.$bvToast.toast('삭제가 실패하였습니다.', {
-            title: 'ERROR',
-            variant: 'danger',
-            solid: true
-          })
-        }
-      }
-    }
-  },
   created() {
     this.searchUserList()
   },
   methods: {
-    searchUserList() {
-      this.$store.dispatch('actUserList', this.search)
-    },
-    onClickAddNew() {
-      // 신규등록
-
-      // 1. 입력모드 설정
-      this.$store.dispatch('actUserInputMode', 'insert')
-
-      // 2. 상세정보 초기화
-      this.$store.dispatch('actUserInit')
-
-      // 3. 모달 출력
-      this.$bvModal.show('modal-user-inform')
-    },
-    onClickEdit(id) {
-      // (수정을 위한)상세정보
-
-      // 1. 입력모드 설정
-      this.$store.dispatch('actUserInputMode', 'update')
-
-      // 2. 상세정보 호출
-      this.$store.dispatch('actUserInfo', id)
-
-      // 3. 모달 출력
-      this.$bvModal.show('modal-user-inform')
-    },
-    onClickDelete(id) {
-      // 삭제
-      this.$bvModal.msgBoxConfirm('삭제 하시겠습니까?').then(value => {
-        if (value) {
-          this.$store.dispatch('actUserDelete', id)
-        }
-      })
-    }
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.parent{
+    width: 400px;
+    margin: 10px auto;
+    display: flex;
+    float: right;
+}
+.calendar1{
+  border: 1px solid red;
+  flex:1;
+  width:5px;
+  box-sizing: border-box;
+}
+.calendar2{
+    border: 1px solid green;
+    flex:1;
+    margin: 0px 5%;
+    width:5px;
+    box-sizing: border-box;
+}
+.calendar3{
+    border: 1px solid blue;
+    flex:1;
+    width:5px;
+    box-sizing: border-box;
+}
+</style>
