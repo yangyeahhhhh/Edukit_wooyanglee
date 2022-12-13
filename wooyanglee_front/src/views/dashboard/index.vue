@@ -6,22 +6,26 @@
       <line-chart ref="chart" :chart-data="chartData" :options="options" style="width: 800px"></line-chart></div>
   </div> -->
   <div class="grid-container">
-    <div class="grid-time">0000. 00. 00. 00:00:00</div>
+    <div class="grid-time" style="font-size: 40px; text-align: center">
+      <div class="checkPageContent">
+        <div class="timeDivP parent">
+          <div id="time">&nbsp;</div>
+        </div>
+      </div>
+    </div>
     <div class="grid-chart">
       <div v-if="chartData">
         <line-chart ref="chart" :chart-data="chartData" :options="options" style="width: 500px"></line-chart>
       </div>
       <div class="grid-state">
         <div class="grid-state2 inline">
-          <h6>전원 상태</h6>
+          <h3>전원 상태</h3>
           <div>
             1호기
             <p>
               {{ plc.power1 === true ? 'ON' : 'OFF' }}
-              <span class="toggle">
-                <input id="toggle1" v-model="plc.power1" type="checkbox" />
-                <label for="toggle1"></label>
-              </span>
+              <i v-if="plc.power1 === true" class="bi bi-circle-fill" style="color: #14a44d"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #dc4c64"></i>
             </p>
           </div>
 
@@ -29,20 +33,16 @@
             2호기
             <p>
               {{ plc.power2 === true ? 'ON' : 'OFF' }}
-              <span class="toggle">
-                <input id="toggle2" v-model="plc.power2" type="checkbox" />
-                <label for="toggle2"></label>
-              </span>
+              <i v-if="plc.power2 === true" class="bi bi-circle-fill" style="color: #14a44d"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #dc4c64"></i>
             </p>
           </div>
           <div>
             3호기
             <p>
               {{ plc.power3 === true ? 'ON' : 'OFF' }}
-              <span class="toggle">
-                <input id="toggle3" v-model="plc.power3" type="checkbox" />
-                <label for="toggle3"></label>
-              </span>
+              <i v-if="plc.power3 === true" class="bi bi-circle-fill" style="color: #14a44d"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #dc4c64"></i>
             </p>
           </div>
         </div>
@@ -111,6 +111,7 @@ export default {
         normal: null,
         sensor2: null
       },
+      today: '',
       maxDataLength: 20, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
       mqttDataList: [], // mqtt를 통해 받은 데이터(리스트로 계속 추가됨)
       chartData: null, // 차트로 표현될 데이터
@@ -124,6 +125,19 @@ export default {
   },
   mounted() {
     this.makeChartData()
+    this.timerInterval = setInterval(() => {
+      const now = new Date()
+      let years = now.getFullYear()
+      let months = now.getMonth() + 1
+      let dates = now.getDate()
+      this.today = `${years}/${months}/${dates}`
+      document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
+    }, 10) // 1초마다 함수 실행되도록 설정
+    this.getCheckList()
+  },
+  destroyed() {
+    //setInterval(계속 반복된 함수를 지워주는 함수)
+    clearInterval(this.timerInterval)
   },
   methods: {
     createMqtt() {
@@ -132,8 +146,8 @@ export default {
 
       mqttClient.on('connect', () => {
         // mqtt연결 시 구독한다.
-        const topic = 'myEdukit' // 구독할 topic
-        mqttClient.subscribe('myEdukit', {}, (error, res) => {
+        const topic = 'wylEdukit' // 구독할 topic
+        mqttClient.subscribe(topic, {}, (error, res) => {
           if (error) {
             console.error('mqtt client error', error)
           }
@@ -266,7 +280,7 @@ export default {
 }
 .grid-time {
   width: 1425px;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   grid-gap: 10px;
 }
 .grid-chart {
@@ -283,11 +297,18 @@ export default {
   grid-gap: 10px;
 }
 .grid-state2 {
+  font-size: 20px;
   grid-template-rows: 20% 20% 20% 20%;
   background-color: #eee;
+  /* border: 5px solid red; */
+  border-radius: 40px 40px;
 }
 .inline div {
   display: inline-block;
   padding: 15px;
+}
+
+.inline {
+  text-align: center;
 }
 </style>

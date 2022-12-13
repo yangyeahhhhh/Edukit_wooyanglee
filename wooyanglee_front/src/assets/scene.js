@@ -39,7 +39,7 @@ class Scene {
   setMesh() {
     this.mesh = new THREE.Mesh(
       new THREE.PlaneGeometry(2000, 2000),
-      new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false })
+      new THREE.MeshPhongMaterial({ color: 0x000000, depthWrite: false })
     )
     this.mesh.rotation.x = -Math.PI / 2
     this.mesh.receiveShadow = true
@@ -49,7 +49,7 @@ class Scene {
 
   setGrid() {
     this.grid = new THREE.GridHelper(2000, 300, 0x000000, 0x000000)
-    this.grid.material.opacity = 0.3
+    this.grid.material.opacity = 0
     this.grid.material.transparent = true
 
     this.scene.add(this.grid)
