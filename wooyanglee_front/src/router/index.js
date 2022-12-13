@@ -26,11 +26,11 @@ const routes = [
       {
         path: '/user',
         component: () => import('../views/user')
+      },
+      {
+        path: '/department',
+        component: () => import('../views/department')
       }
-      // {
-      //   path: '/device',
-      //   component: () => import('../views/device')
-      // }
     ]
   },
   {
@@ -48,11 +48,6 @@ const routes = [
         meta: { header: false, noLogin: true }
       }
     ]
-  },
-  {
-    path: '/department',
-    name: 'department',
-    component: () => import('../views/department.vue')
   },
   {
     path: '/materials',

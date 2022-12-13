@@ -9,8 +9,10 @@
     "fix": "eslint --fix --ext .js,.vue src"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "axios": "^0.24.0",
     "bootstrap": "^4.5.3",
+    "bootstrap-icons": "^1.10.2",
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^2.9.4",
     "core-js": "^3.6.5",
