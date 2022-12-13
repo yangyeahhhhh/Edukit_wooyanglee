@@ -127,6 +127,7 @@ export default {
           datasets: [
             {
               label: 'no data',
+              // data: [0]
               data: [1]
             }
           ]
