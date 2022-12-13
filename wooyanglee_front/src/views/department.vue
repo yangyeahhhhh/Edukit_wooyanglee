@@ -1,16 +1,20 @@
 <template>
   <div>
-    <h1>작업 내역</h1>
-    <div class="parent" style="margin-bottom: 5px">
-      <div class="calendar1">시작날짜
-      <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m5 1032.4c-1.1046 0-2 0.9-2 2v14c0 1.1 0.8954 2 2 2h6 2 6c1.105 0 2-0.9 2-2v-14c0-1.1-0.895-2-2-2h-6-2-6z" fill="#bdc3c7"/><path d="m5 3c-1.1046 0-2 0.8954-2 2v14c0 1.105 0.8954 2 2 2h6 2 6c1.105 0 2-0.895 2-2v-14c0-1.1046-0.895-2-2-2h-6-2-6z" fill="#ecf0f1" transform="translate(0 1028.4)"/><path d="m5 1031.4c-1.1046 0-2 0.9-2 2v3h18v-3c0-1.1-0.895-2-2-2h-6-2-6z" fill="#e74c3c"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(.5 1028.4)"/><path d="m6 1c-0.5523 0-1 0.4477-1 1v3c0 0.5523 0.4477 1 1 1s1-0.4477 1-1v-3c0-0.5523-0.4477-1-1-1z" fill="#bdc3c7" transform="translate(0 1028.4)"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(12.5 1028.4)"/><g fill="#bdc3c7"><path d="m18 1029.4c-0.552 0-1 0.4-1 1v3c0 0.5 0.448 1 1 1s1-0.5 1-1v-3c0-0.6-0.448-1-1-1z"/><path d="m5 1039.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1042.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1045.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/></g><rect fill="#c0392b" height="1" transform="translate(0 1028.4)" width="18" x="3" y="8"/></g></svg></div>
-      <div class="calendar2">끝날짜
-      <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m5 1032.4c-1.1046 0-2 0.9-2 2v14c0 1.1 0.8954 2 2 2h6 2 6c1.105 0 2-0.9 2-2v-14c0-1.1-0.895-2-2-2h-6-2-6z" fill="#bdc3c7"/><path d="m5 3c-1.1046 0-2 0.8954-2 2v14c0 1.105 0.8954 2 2 2h6 2 6c1.105 0 2-0.895 2-2v-14c0-1.1046-0.895-2-2-2h-6-2-6z" fill="#ecf0f1" transform="translate(0 1028.4)"/><path d="m5 1031.4c-1.1046 0-2 0.9-2 2v3h18v-3c0-1.1-0.895-2-2-2h-6-2-6z" fill="#e74c3c"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(.5 1028.4)"/><path d="m6 1c-0.5523 0-1 0.4477-1 1v3c0 0.5523 0.4477 1 1 1s1-0.4477 1-1v-3c0-0.5523-0.4477-1-1-1z" fill="#bdc3c7" transform="translate(0 1028.4)"/><path d="m7 5.5a1.5 1.5 0 1 1 -3 0 1.5 1.5 0 1 1 3 0z" fill="#c0392b" transform="translate(12.5 1028.4)"/><g fill="#bdc3c7"><path d="m18 1029.4c-0.552 0-1 0.4-1 1v3c0 0.5 0.448 1 1 1s1-0.5 1-1v-3c0-0.6-0.448-1-1-1z"/><path d="m5 1039.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1042.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/><path d="m5 1045.4v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2zm3 0v2h2v-2h-2z"/></g><rect fill="#c0392b" height="1" transform="translate(0 1028.4)" width="18" x="3" y="8"/></g></svg>
-      </div>
-      <div class="calendar3">조회
-       <i class="bi bi-search"></i>
+<div class="container px-1 px-sm-5">
+  <form autocomplete="off">
+    <div class="flex-row d-flex justify-content-center">
+      <div class="col-md-5 col-11s">
+        <div class="input-group input-daterange">
+          <input type="text" class="form-control input1" placeholder="Start Date" readonly>
+          <input type="text" class="form-control input2" placeholder="End Date" readonly>
+          <div>
+            <button>완료</button>
+          </div>
+        </div>
       </div>
     </div>
+  </form>
+</div>
     <div>
       <b-table small hover striped :items="userList" :fields="fields">
         <template #cell(Department)="row">
@@ -35,6 +39,17 @@
 
 <script>
 import inform from './user/inform.vue'
+
+$(document).ready(function(){
+
+$('.input-daterange').datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    language : "ko",
+    endDate: '+1d' // 오늘 이후로는 날짜 선택 불가능
+});
+
+});
 
 export default {
   components: {
@@ -79,29 +94,161 @@ export default {
 </script>
 
 <style scoped>
-.parent{
-    width: 400px;
-    margin: 5px auto;
-    display: flex;
-    float: right;
+body {
+    color: #000;
+    overflow-x: hidden;
+    height: 100%;
+    background-color: #66BB6A !important;
+    background-repeat: no-repeat;
 }
-.calendar1{
-  /* border: 1px solid red; */
-  flex:0.5px;
-  width:5px;
-  box-sizing: border-box;
+
+.container {
+  padding-top: 40px;
+  padding-bottom: 10px;
 }
-.calendar2{
-    /* border: 1px solid green; */
-    flex:0.5px;
-    margin: 1px;
-    width:5px;
+
+input {
+    padding: 30px 15px !important;
+    border: 1px solid lightgrey !important;
+    border-radius: 10px;
     box-sizing: border-box;
+    background-color: #fff !important;
+    color: #4CAF50 !important;
+    font-size: 18px !important;
+    letter-spacing: 1px;
+    position: relative;
+    font-weight: bold !important;
 }
-.calendar3{
-    /* border: 1px solid blue; */
-    flex:0.5px;
-    width:5px;
-    box-sizing: border-box;
+
+.input1 {
+  text-align: left !important;
+}
+
+.input2 {
+  text-align: right !important;
+}
+
+input:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #512DA8;
+    outline-width: 0;
+}
+
+::placeholder {
+    color: #dc143c;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    color: #dc143c;
+}
+
+::-ms-input-placeholder {
+    color: #dc143c;
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+}
+
+.datepicker {
+  background-color: #388e3c;
+  border-radius: 10;
+  padding: 15px 20px !important;
+  align-content: right !important;
+}
+
+.datepicker-dropdown {
+  top: 0;
+  left: calc(50% - 161px) !important;
+}
+
+.datepicker-dropdown.datepicker-orient-left:before {
+  left: calc(50% - 6px) !important;
+}
+
+.datepicker-dropdown.datepicker-orient-left:after {
+  left: calc(50% - 5px) !important;
+}
+
+.datepicker table tr td.today, span.focused {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#FFF3E0, #388e3c);
+}
+
+.datepicker table tr td.today.range {
+  background-image: linear-gradient(#eeeeee, #388e3c) !important;
+  border-radius: 50% !important;
+}
+
+/*Weekday title*/
+thead tr:nth-child(3) th {
+  font-weight: bold !important;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.old, .day, .new {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 0px !important;
+  border: 1px solid lightgrey !important;
+}
+
+.day.old, .day.new {
+  background-color: #F5F5F5 !important;
+  color: #E0E0E0 !important;
+}
+
+.day.old:hover, .day.new:hover {
+  border-radius: 0px !important;
+}
+
+.old-day:hover, .day:hover, .new-day:hover, .month:hover, .year:hover, .decade:hover, .century:hover {
+  border-radius: 50% !important;
+  background-color: #eee;
+}
+
+.active {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#90CAF9, #64B5F6) !important;
+  color: #fff !important;
+}
+
+.range-start, .range-end {
+  border-radius: 50% !important;
+  background-image: linear-gradient(#4CAF50, #4CAF50) !important;
+}
+
+.range {
+  color: #4CAF50 !important;
+}
+
+.prev, .next, .datepicker-switch {
+  border-radius: 0 !important;
+  padding: 10px 10px 10px 10px !important;
+  font-size: 18px;
+  opacity: 0.7;
+  color: #4CAF50;
+}
+
+.prev:hover, .next:hover, .datepicker-switch:hover {
+  background-color: inherit !important;
+  opacity: 1;
+}
+
+@media screen and (max-width: 700px) {
+  .datepicker-dropdown.datepicker-orient-right:before {
+    right: calc(50% - 6px) !important;
+  }
+
+  .datepicker-dropdown.datepicker-orient-right:after {
+    right: calc(50% - 5px) !important;
+  }
 }
 </style>
