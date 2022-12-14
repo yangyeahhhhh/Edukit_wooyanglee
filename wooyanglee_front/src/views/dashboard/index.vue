@@ -58,9 +58,9 @@
             </p>
           </div>
           <div>
-            컬러센서
+            검수
             <p>
-              {{ plc.no1error === true ? '포장지걸림' : '안걸림' }}
+              {{ plc.normalcheck === true ? '양품' : '&nbsp ' }}
             </p>
           </div>
 
@@ -81,8 +81,8 @@
             </p>
           </div>
         </div>
-        <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div>
-        <div class="grid-state2">00월 00일 누적생산량</div>
+        <div class="grid-state2 inline">양품수: {{ plc.normal }}개 <br />불량품수: {{ plc.defect }}개</div>
+        <div class="grid-state2 inline">00월 00일 누적생산량</div>
       </div>
     </div>
   </div>
@@ -145,7 +145,7 @@ export default {
         normal: null,
         sensor2: null,
         no1inventorycheck: null,
-        no1error: null,
+        normalcehck: null,
         motion1: null,
         motion2: null,
         motion3: null
@@ -172,7 +172,6 @@ export default {
       this.today = `${years}/${months}/${dates}`
       document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
     }, 10) // 1초마다 함수 실행되도록 설정
-    this.getCheckList()
   },
   destroyed() {
     //setInterval(계속 반복된 함수를 지워주는 함수)
@@ -222,13 +221,13 @@ export default {
 
         // 재고 확인
         let inventoryCheck = mqttData.Wrapper.filter(
-          p => p.tagId === '23' || p.tagId === '2' || p.tagId === '3' || p.tagId === '29' || p.tagId === '32'
+          p => p.tagId === '3' || p.tagId === '23' || p.tagId === '29' || p.tagId === '39' || p.tagId === '40'
         )
 
-        this.plc.no1inventorycheck = inventoryCheck[2].value
-        this.plc.no1error = inventoryCheck[0].value
-        this.plc.motion1 = inventoryCheck[1].value
-        this.plc.motion2 = inventoryCheck[3].value
+        this.plc.no1inventorycheck = inventoryCheck[1].value
+        this.plc.normalcheck = inventoryCheck[3].value
+        this.plc.motion1 = inventoryCheck[0].value
+        this.plc.motion2 = inventoryCheck[2].value
         this.plc.motion3 = inventoryCheck[4].value
         console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', inventoryCheck)
 
