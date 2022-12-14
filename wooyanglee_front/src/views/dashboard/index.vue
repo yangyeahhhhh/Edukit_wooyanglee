@@ -46,7 +46,41 @@
             </p>
           </div>
         </div>
-        <div class="grid-state2">공정 진행 상태</div>
+        <div class="grid-state2 inline">
+          <h3>공정 진행 상태</h3>
+          <h6>{{ plc.no1inventorycheck === true ? '재고가 넉넉' : '재고가 없다' }}</h6>
+          <div>
+            1호기
+            <p>
+              {{ plc.motion1 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion1 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
+          <div>
+            컬러센서
+            <p>
+              {{ plc.no1error === true ? '포장지걸림' : '안걸림' }}
+            </p>
+          </div>
+
+          <div>
+            2호기
+            <p>
+              {{ plc.motion2 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion2 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
+          <div>
+            3호기
+            <p>
+              {{ plc.motion3 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion3 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
+        </div>
         <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div>
         <div class="grid-state2">00월 00일 누적생산량</div>
       </div>
@@ -109,7 +143,12 @@ export default {
         power3: null,
         defect: null,
         normal: null,
-        sensor2: null
+        sensor2: null,
+        no1inventorycheck: null,
+        no1error: null,
+        motion1: null,
+        motion2: null,
+        motion3: null
       },
       today: '',
       maxDataLength: 20, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
@@ -171,7 +210,6 @@ export default {
         let goodsData = mqttData.Wrapper.filter(
           p => p.tagId === '17' || p.tagId === '15' || p.tagId === '16' || p.tagId === '24'
         )
-        console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', goodsData)
         this.plc.sensor2 = goodsData[0].value
         this.plc.normal = goodsData[3].value
         let defectValue
@@ -181,6 +219,18 @@ export default {
           defectValue = '불량품검수중'
         }
         this.plc.defect = defectValue
+
+        // 재고 확인
+        let inventoryCheck = mqttData.Wrapper.filter(
+          p => p.tagId === '23' || p.tagId === '2' || p.tagId === '3' || p.tagId === '29' || p.tagId === '32'
+        )
+
+        this.plc.no1inventorycheck = inventoryCheck[2].value
+        this.plc.no1error = inventoryCheck[0].value
+        this.plc.motion1 = inventoryCheck[1].value
+        this.plc.motion2 = inventoryCheck[3].value
+        this.plc.motion3 = inventoryCheck[4].value
+        console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', inventoryCheck)
 
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거
@@ -307,11 +357,6 @@ export default {
   display: inline-block;
   padding: 15px;
 }
-
-.inline {
-  text-align: center;
-}
-</style>
 
 .inline {
   text-align: center;
