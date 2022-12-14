@@ -2,23 +2,25 @@
   <div>
 <div class="container px-1 px-sm-5">
   <form autocomplete="off">
-    <div class="flex-row d-flex justify-content-center">
+    <div class="flex-row d-flex justify-content-center right">
       <div class="col-md-5 col-11s">
         <div class="input-group input-daterange">
-          <input type="text" class="form-control input1" placeholder="Start Date" readonly>
+          <input type="text" id="example-datepicker" v-model="value" class="form-control input1" placeholder="Start Date">
           <input type="text" class="form-control input2" placeholder="End Date" readonly>
           <div>
-            <button>완료</button>
+            <b-button size="md" variant="success" @click="postDate()">조회</b-button>
           </div>
+          <p>Value: '{{ value }}'</p>
         </div>
       </div>
     </div>
   </form>
 </div>
     <div>
-      <b-table small hover striped :items="userList" :fields="fields">
-        <template #cell(Department)="row">
-          {{ row.item.Department && row.item.Department.name }}
+      <b-table small hover striped :fields="fields">
+      <!-- <b-table small hover striped :items="userList" :fields="fields"> -->
+        <template #cell(Historylog)="row">
+          {{ row.item.Historylog && row.item.Historylog.name }}
         </template>
         <template #cell(createdAt)="row">
           {{ row.item.createdAt.substring(0, 10) }}
@@ -31,7 +33,6 @@
         </template>
       </b-table>
     </div>
-
     <!-- inform 영역 -->
     <inform />
   </div>
@@ -68,32 +69,42 @@ export default {
       search: {
         name: null,
         userid: null
-      }
+      },
+      startDate: '',
+      endDate: '',
+      dateString:'',
+      value: '',
     }
   },
-  computed: {
-    userList() {
-      return this.$store.getters.UserList
-    },
-    insertedResult() {
-      return this.$store.getters.UserInsertedResult
-    },
-    updatedResult() {
-      return this.$store.getters.UserUpdatedResult
-    },
-    deletedResult() {
-      return this.$store.getters.UserDeletedResult
-    }
-  },
-  created() {
-    this.searchUserList()
-  },
+  // computed: {
+  //   userList() {
+  //     return this.$store.getters.UserList
+  //   },
+  //   insertedResult() {
+  //     return this.$store.getters.UserInsertedResult
+  //   },
+  //   updatedResult() {
+  //     return this.$store.getters.UserUpdatedResult
+  //   },
+  //   deletedResult() {
+  //     return this.$store.getters.UserDeletedResult
+  //   }
+  // },
+  // created() {
+  //   this.searchUserList()
+  // },
   methods: {
+    postDate(){
+      console.log('전송', this.value);
+    }
   }
 }
 </script>
 
 <style scoped>
+.right{
+  justify-content: right !important;
+}
 body {
     color: #000;
     overflow-x: hidden;
@@ -108,24 +119,20 @@ body {
 }
 
 input {
-    padding: 30px 15px !important;
-    border: 1px solid lightgrey !important;
+    padding: 30px 15px;
+    border: 1px solid lightgrey;
     border-radius: 10px;
     box-sizing: border-box;
     background-color: #fff !important;
-    color: #4CAF50 !important;
-    font-size: 18px !important;
+    color: #4CAF50;
+    font-size: 18px;
     letter-spacing: 1px;
     position: relative;
-    font-weight: bold !important;
+    font-weight: bold;
 }
 
-.input1 {
-  text-align: left !important;
-}
-
-.input2 {
-  text-align: right !important;
+.input1 .input2 {
+  text-align: center;
 }
 
 input:focus {
