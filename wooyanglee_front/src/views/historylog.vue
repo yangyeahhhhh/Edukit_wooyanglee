@@ -8,15 +8,15 @@
               <input
                 id="example-datepicker"
                 v-model="value"
-                type="text"
+                type="date"
                 class="form-control input1"
                 placeholder="Start Date"
               />
-              <input type="text" class="form-control input2" placeholder="End Date" readonly />
+              <input type="date" v-model="value2" class="form-control input2" placeholder="End Date" />
               <div>
                 <b-button size="md" variant="success" @click="postDate()">조회</b-button>
               </div>
-              <p>Value: '{{ value }}'</p>
+              <!-- <p>start: '{{ value }}, {{ value2 }}' </p> -->
             </div>
           </div>
         </div>
@@ -47,6 +47,7 @@
 <script>
 import inform from './user/inform.vue'
 
+
 $(document).ready(function () {
   $('.input-daterange').datepicker({
     format: 'yyyy-mm-dd',
@@ -72,35 +73,36 @@ export default {
       ],
       search: {
         name: null,
-        userid: null
+        historyid: null
       },
       startDate: '',
       endDate: '',
       dateString: '',
-      value: ''
+      value: '',
+      value2: '',
     }
   },
-  // computed: {
-  //   userList() {
-  //     return this.$store.getters.UserList
-  //   },
-  //   insertedResult() {
-  //     return this.$store.getters.UserInsertedResult
-  //   },
-  //   updatedResult() {
-  //     return this.$store.getters.UserUpdatedResult
-  //   },
-  //   deletedResult() {
-  //     return this.$store.getters.UserDeletedResult
-  //   }
-  // },
-  // created() {
-  //   this.searchUserList()
-  // },
-  methods: {
-    postDate() {
-      console.log('전송', this.value)
+  computed: {
+    historyList() {
+      return this.$store.getters.HistoryList
+    },
+    insertedResult() {
+      return this.$store.getters.HistoryInsertedResult
+    },
+    updatedResult() {
+      return this.$store.getters.HistoryUpdatedResult
+    },
+    deletedResult() {
+      return this.$store.getters.HistoryDeletedResult
     }
+  },
+  created() {
+    this.searchHistoryList()
+  },
+  methods: {
+    searchHistoryList() {
+      this.$store.dispatch('actHistoryList', this.search)
+    },
   }
 }
 </script>
