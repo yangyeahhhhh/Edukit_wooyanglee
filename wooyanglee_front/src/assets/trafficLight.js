@@ -32,7 +32,6 @@ class TrafficLight {
     )
     // 밝은 초록 00FF00 밝은 빨강 FF0000 노랑 FFFF00
 
-
     this.trafficLight()
   }
 
