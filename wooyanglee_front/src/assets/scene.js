@@ -5,6 +5,7 @@ import * as THREE from 'three'
 import { Resource } from './resource'
 import { Camera } from './camera'
 import { Light } from './light'
+import { TrafficLight } from './trafficLight'
 
 class Scene {
   constructor(file = null) {
@@ -13,6 +14,7 @@ class Scene {
     this.resource = new Resource(file)
     this.camera = new Camera()
     this.light = new Light()
+    this.trafficLight = new TrafficLight()
 
     this.setScene()
     this.setMesh()
@@ -34,6 +36,14 @@ class Scene {
     this.scene.add(this.camera.camera)
 
     this.scene.add(this.light.dirLight)
+
+    this.scene.add(this.trafficLight.trafficLight1)
+    this.scene.add(this.trafficLight.trafficLight2)
+    this.scene.add(this.trafficLight.trafficLight3)
+    this.scene.add(this.trafficLight.pillarTop1)
+    this.scene.add(this.trafficLight.pillarTop2)
+    this.scene.add(this.trafficLight.pillarFloor)
+    this.scene.add(this.trafficLight.pillar)
   }
 
   setMesh() {
