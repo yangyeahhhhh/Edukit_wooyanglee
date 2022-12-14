@@ -32,6 +32,8 @@ module.exports = class User extends Sequelize.Model {
       },
     }, {
       sequelize,
+      modelName: 'User',
+      tableName: 'User',
       // tableName: 'tableName', // table명을 수동으로 생성 함
       // freezeTableName: true, // true: table명의 복수형 변환을 막음
       underscored: true, // true: underscored, false: camelCase
@@ -41,6 +43,5 @@ module.exports = class User extends Sequelize.Model {
   }
 
   // static associate(db) {
-  //   db.User.belongsTo(db.Department, { foreignKey: { name: 'departmentId', onDelete: 'SET NULL', as: 'Department' } });
   // }
 };
