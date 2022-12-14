@@ -48,7 +48,7 @@ $('.input-daterange').datepicker({
     autoclose: true,
     language : "ko",
     endDate: '+1d' // 오늘 이후로는 날짜 선택 불가능
-});
+})
 
 });
 

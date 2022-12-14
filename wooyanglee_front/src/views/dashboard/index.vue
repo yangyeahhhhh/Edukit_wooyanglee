@@ -47,8 +47,11 @@
           </div>
         </div>
         <div class="grid-state2">공정 진행 상태</div>
-        <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div>
-        <div class="grid-state2">00월 00일 누적생산량</div>
+        <!-- <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div> -->
+        <div class="grid-state3">
+          <div class="grid-state4">도넛그래프</div>
+          <div class="grid-state4">개수</div>
+        </div>
       </div>
     </div>
   </div>
@@ -298,10 +301,21 @@ export default {
 }
 .grid-state2 {
   font-size: 20px;
-  grid-template-rows: 20% 20% 20% 20%;
+  grid-template-rows: 20% 20% 40%;
   background-color: #eee;
   /* border: 5px solid red; */
   border-radius: 40px 40px;
+}
+.grid-state3 {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  float: left;
+}
+.grid-state4 {
+  float: left;
+  background-color: #eee;
+  border-radius: 40px;
+  margin: 3px;
 }
 .inline div {
   display: inline-block;
