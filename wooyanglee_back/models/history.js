@@ -53,6 +53,5 @@ module.exports = class History extends Sequelize.Model {
   }
 
   // static associate(db) {
-  //   // db.User.belongsTo(db.Department, { foreignKey: { name: 'departmentId', onDelete: 'SET NULL', as: 'Department' } });
   // }
 };

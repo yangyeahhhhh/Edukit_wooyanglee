@@ -45,8 +45,43 @@
               <i v-else class="bi bi-circle-fill" style="color: #dc4c64"></i>
             </p>
           </div>
+        </div>        
+        <div class="grid-state2 inline">
+          <h3>공정 진행 상태</h3>
+          <h6>{{ plc.no1inventorycheck === true ? '재고가 넉넉' : '재고가 없다' }}</h6>
+          <div>
+            1호기
+            <p>
+              {{ plc.motion1 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion1 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
+          <div>
+            검수
+            <p>
+              {{ plc.normalcheck === true ? '양품' : '&nbsp ' }}
+            </p>
+          </div>
+
+          <div>
+            2호기
+            <p>
+              {{ plc.motion2 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion2 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
+          <div>
+            3호기
+            <p>
+              {{ plc.motion3 === true ? 'ON' : 'OFF' }}
+              <i v-if="plc.motion3 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
+              <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
+            </p>
+          </div>
         </div>
-        <div class="grid-state2">공정 진행 상태</div>
+        
         <!-- <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div> -->
         <div class="grid-state3">
           <div class="grid-state4">도넛그래프</div>
@@ -112,7 +147,12 @@ export default {
         power3: null,
         defect: null,
         normal: null,
-        sensor2: null
+        sensor2: null,
+        no1inventorycheck: null,
+        normalcehck: null,
+        motion1: null,
+        motion2: null,
+        motion3: null
       },
       today: '',
       maxDataLength: 20, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
@@ -136,7 +176,6 @@ export default {
       this.today = `${years}/${months}/${dates}`
       document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
     }, 10) // 1초마다 함수 실행되도록 설정
-    this.getCheckList()
   },
   destroyed() {
     //setInterval(계속 반복된 함수를 지워주는 함수)
@@ -174,7 +213,6 @@ export default {
         let goodsData = mqttData.Wrapper.filter(
           p => p.tagId === '17' || p.tagId === '15' || p.tagId === '16' || p.tagId === '24'
         )
-        console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', goodsData)
         this.plc.sensor2 = goodsData[0].value
         this.plc.normal = goodsData[3].value
         let defectValue
@@ -184,6 +222,18 @@ export default {
           defectValue = '불량품검수중'
         }
         this.plc.defect = defectValue
+
+        // 재고 확인
+        let inventoryCheck = mqttData.Wrapper.filter(
+          p => p.tagId === '3' || p.tagId === '23' || p.tagId === '29' || p.tagId === '39' || p.tagId === '40'
+        )
+
+        this.plc.no1inventorycheck = inventoryCheck[1].value
+        this.plc.normalcheck = inventoryCheck[3].value
+        this.plc.motion1 = inventoryCheck[0].value
+        this.plc.motion2 = inventoryCheck[2].value
+        this.plc.motion3 = inventoryCheck[4].value
+        console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', inventoryCheck)
 
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거
