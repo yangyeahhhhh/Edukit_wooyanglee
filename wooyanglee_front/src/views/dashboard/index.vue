@@ -60,7 +60,7 @@
           <div>
             검수
             <p>
-              {{ plc.normalcheck === true ? '양품' : '&nbsp ' }}
+              {{ plc.normalcheck === true ? '양품' : '&nbsp' }}
             </p>
           </div>
 
