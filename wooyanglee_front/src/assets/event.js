@@ -80,7 +80,6 @@ class Event {
         p.tagId === '19' || 
         p.tagId === '20' 
         )
-
         
         if ( data[0].value == true) {
           console.log("green on")
@@ -105,8 +104,8 @@ class Event {
         
         data = data.map(p => parseInt(p.value))
 
-        edukit['yAxis'] = data[0]
-        edukit['xAxis'] = data[1]
+        edukit['yAxis'] = data[3]
+        edukit['xAxis'] = data[4]
       })
     })
   }
