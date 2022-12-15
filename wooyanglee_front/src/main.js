@@ -12,6 +12,9 @@ Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 new Vue({
+  // el: "#app",
+  // components: { App },
+  // template: "<App/>",
   router,
   store,
   render: h => h(App)
