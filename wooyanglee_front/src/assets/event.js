@@ -98,8 +98,8 @@ class Event {
 
         data = data.map(p => parseInt(p.value))
 
-        edukit['yAxis'] = data[0]
-        edukit['xAxis'] = data[1]
+        edukit['yAxis'] = data[3]
+        edukit['xAxis'] = data[4]
       })
     })
   }
