@@ -18,7 +18,16 @@
       </b-row>
     </div>
     <div>
-      <b-table small hover striped :items="userList" :fields="fields">
+      <b-table
+        id="user-table"
+        small
+        hover
+        striped
+        :items="userList"
+        :fields="fields"
+        :per-page="perPage"
+        :current-page="currentPage"
+      >
         <template #cell(Department)="row">
           {{ row.item.Department && row.item.Department.name }}
         </template>
@@ -32,6 +41,10 @@
           <b-button size="sm" variant="danger" @click="onClickDelete(row.item.id)">삭제</b-button>
         </template>
       </b-table>
+      <div class="pagination justify-content-center">
+        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="user-table">
+        </b-pagination>
+      </div>
     </div>
 
     <!-- inform 영역 -->
@@ -48,6 +61,8 @@ export default {
   },
   data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       fields: [
         { key: 'id', label: 'id' },
         { key: 'name', label: '이름' },
@@ -77,6 +92,9 @@ export default {
     },
     deletedResult() {
       return this.$store.getters.UserDeletedResult
+    },
+    rows() {
+      return this.userList.length
     }
   },
   watch: {
