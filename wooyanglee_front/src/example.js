@@ -13,8 +13,8 @@ import { Gui } from './plugins/gui'
 
 export default async element => {
   console.log(element)
-  element.style.width = '100%'
-  element.style.height = '100%'
+  element.style.width = '1000px'
+  element.style.height = '600px'
 
   // Scene Setting.
   let scene = new Scene('edukit')

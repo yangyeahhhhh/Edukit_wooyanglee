@@ -1,7 +1,6 @@
 <template>
   <div>
     <div ref="webgl"></div>
-    <div ref="webgl"></div>
   </div>
 </template>
 
