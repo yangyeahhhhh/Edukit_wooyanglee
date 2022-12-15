@@ -45,7 +45,7 @@
               <i v-else class="bi bi-circle-fill" style="color: #dc4c64"></i>
             </p>
           </div>
-        </div>        
+        </div>
         <div class="grid-state2 inline">
           <h3>공정 진행 상태</h3>
           <h6>{{ plc.no1inventorycheck === true ? '재고가 넉넉' : '재고가 없다' }}</h6>
@@ -81,11 +81,13 @@
             </p>
           </div>
         </div>
-        
+
         <!-- <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div> -->
         <div class="grid-state3">
-          <div class="grid-state4">도넛그래프</div>
-          <div class="grid-state4">개수</div>
+          <div class="grid-state4 inline">도넛그래프</div>
+          <div class="grid-state4 inline">
+            <p>양품수 : {{ plc.normal }}개</p>
+          </div>
         </div>
       </div>
     </div>
@@ -113,7 +115,7 @@ export default {
         responsive: true,
         title: {
           display: true,
-          text: '3호기 x축 차트'
+          text: '양품 차트'
         },
         tooltips: {
           mode: 'index'
@@ -155,7 +157,7 @@ export default {
         motion3: null
       },
       today: '',
-      maxDataLength: 20, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
+      maxDataLength: 10, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
       mqttDataList: [], // mqtt를 통해 받은 데이터(리스트로 계속 추가됨)
       chartData: null, // 차트로 표현될 데이터
       chartLabels: [], // 차트에서 사용할 라벨 리스트(가로축 라벨)
@@ -290,7 +292,7 @@ export default {
     },
     makeChartLabels(mqttData) {
       // 차트라벨(가로측) 생성
-      this.chartLabels.push(mqttData.Wrapper[40].value.substring(12, 20))
+      this.chartLabels.push(mqttData.Wrapper[40].value.substring(11, 19))
       // datetime을 사용한다.(분:초만 추출함)
     },
     makeDatasetDatas() {
@@ -326,7 +328,7 @@ export default {
 <style>
 .grid-container {
   display: grid;
-  width: 1425px;
+  width: 1580px;
   grid-template-rows: 70px 515px;
   grid-gap: 10px;
   /* background-color: aqua; */
@@ -374,5 +376,6 @@ export default {
 
 .inline {
   text-align: center;
+  align-items: center;
 }
 </style>

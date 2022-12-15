@@ -54,7 +54,6 @@ export default {
   actions: {
     // 리스트 조회
     actHistoryList(context, payload) {
-      
       /* RestAPI 호출 */
       api
         .get('/serverApi/history', { params: payload })
