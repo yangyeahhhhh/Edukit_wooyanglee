@@ -3,42 +3,26 @@ const Sequelize = require('sequelize');
 module.exports = class History extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
-      // departmentId: {
-      //   type: Sequelize.INTEGER,
-      // },
-      userid: {
+      date: { // "날짜" // from Dashboard
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      goods: { // "양품개수"  // 2호기count <<< No2Count, tagId: '16'
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      defective: { // "불량품개수" // 불량품 총 수량 카운트 // inputP - goods
+        type: Sequelize.STRING,
+      },
+      inputP: { // "총생산량"  // 1호기count <<< No1Count, tagId: '15'
+        type: Sequelize.STRING,
+        // unique : true,
+        allowNull: true,
+      },
+      name: { // "작업자" // front - req body
         type: Sequelize.STRING(255),
         unique: false,
         allowNull: false,
-      },
-      xAxis: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      yAxis: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      input: {
-        type: Sequelize.STRING,
-      },
-      output: {
-        type: Sequelize.STRING,
-      },
-      defective: {
-        type: Sequelize.STRING,
-      },
-      startedAt: {
-        type: Sequelize.DATE(255),
-      },
-      endedAt: {
-        type: Sequelize.DATE(255),
-      },
-      runTime: {
-        type: Sequelize.INTEGER,
-      },
-      eStop: {
-        type: Sequelize.BOOLEAN,
       },
     }, {
       sequelize,

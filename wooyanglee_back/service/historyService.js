@@ -1,5 +1,6 @@
 const logger = require('../lib/logger');
-const hashUtil = require('../lib/hashUtil');
+const hashUtil = require('../lib/hashUtil');// ..?
+const historyDao = require('../dao/historyDao');
 const userDao = require('../dao/userDao');
 
 const service = {
@@ -48,7 +49,7 @@ const service = {
     let result = null;
 
     try {
-      result = await userDao.selectList(params);
+      result = await historyDao.selectList(params);
       logger.debug(`(userService.list) ${JSON.stringify(result)}`);
     } catch (err) {
       logger.error(`(userService.list) ${err.toString()}`);

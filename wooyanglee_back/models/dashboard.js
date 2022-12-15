@@ -12,11 +12,11 @@ module.exports = class Dashboard extends Sequelize.Model {
         // unique : true,
         allowNull: true,
       },
-      inputC: {  // 원자재(Contents) 투입량 <<< no2생산량 No2Count //tagId: '16'
-        type: Sequelize.STRING,
+      colorSensor: {  // 양품 T/F           No3Count //tagId: '17'
+        type: Sequelize.BOOLEAN,
         allowNull: true,
       },
-      goods: {  // 양품총수량카운트 No3Count //tagId: '17'
+      goods: {  // 원자재(Contents) 투입량 =양품총수량 <<< no2생산량 No2Count //tagId: '16'
         type: Sequelize.STRING,
         allowNull: true,
       },
