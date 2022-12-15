@@ -3,7 +3,7 @@
  * 방식은 자유지만 본 프로젝트에서는 mqtt를 사용함
  */
 import mqtt from 'mqtt'
-import {Scene} from './scene'
+import { Scene } from './scene'
 
 class Event {
   constructor(element, edukit) {
@@ -37,8 +37,7 @@ class Event {
         path: inputPathElement.value,
         topic: inputTopicElement.value,
         status: statusElement.style,
-        edukit: edukit,
-        
+        edukit: edukit
       }
       statusElement.style.color = 'red'
       if (this.client) this.client.end()
@@ -50,7 +49,7 @@ class Event {
   }
 
   setEvent(props, scene) {
-    let { hostname, port, path, topic, status, edukit  } = props
+    let { hostname, port, path, topic, status, edukit } = props
 
     const clientId = `mqtt_${Math.random().toString(16).slice(3)}`
     this.client = mqtt.connect({
@@ -67,41 +66,36 @@ class Event {
       status.color = 'green'
 
       this.client.subscribe([topic], () => {
-        console.log(`토픽 연결 완료: ${topic}`) 
+        console.log(`토픽 연결 완료: ${topic}`)
       })
       this.client.on('message', (topic, payload) => {
         // console.log(`토픽 ${topic}에서 전송된 메시지: ${payload.toString()}`)
 
         let message = JSON.parse(payload)
-        let data = message.Wrapper.filter(p => 
-        p.tagId === '21' || 
-        p.tagId === '22' ||
-        p.tagId === '18' || 
-        p.tagId === '19' || 
-        p.tagId === '20' 
+        let data = message.Wrapper.filter(
+          p => p.tagId === '21' || p.tagId === '22' || p.tagId === '18' || p.tagId === '19' || p.tagId === '20'
         )
-        
-        if ( data[0].value == true) {
-          console.log("green on")
-          console.log(scene.trafficLight.trafficLight1.material.color);
+
+        if (data[0].value == true) {
+          console.log('green on')
+          console.log(scene.trafficLight.trafficLight1.material.color)
           scene.trafficLight.trafficLight1.material.color.set(0x00ff00)
         } else if (data[0].value == false) {
           scene.trafficLight.trafficLight1.material.color.set(0x003300)
         }
         if (data[1].value == true) {
-          console.log("yellow on")
+          console.log('yellow on')
           scene.trafficLight.trafficLight2.material.color.set(0xffff00)
         } else if (data[1].value == false) {
           scene.trafficLight.trafficLight2.material.color.set(0x996600)
         }
         if (data[2].value == true) {
-          console.log("red on")
+          console.log('red on')
           scene.trafficLight.trafficLight3.material.color.set(0xff0000)
         } else if (data[2].value == false) {
           scene.trafficLight.trafficLight3.material.color.set(0x660000)
         }
 
-        
         data = data.map(p => parseInt(p.value))
 
         edukit['yAxis'] = data[3]

@@ -12,7 +12,7 @@
                 class="form-control input1"
                 placeholder="Start Date"
               />
-              <input type="date" v-model="value2" class="form-control input2" placeholder="End Date" />
+              <input v-model="value2" type="date" class="form-control input2" placeholder="End Date" />
               <div>
                 <b-button size="md" variant="success" @click="postDate()">조회</b-button>
               </div>
@@ -23,19 +23,13 @@
       </form>
     </div>
     <div>
-      <b-table small hover striped :fields="fields">
+      <b-table small hover striped :items="historyList" :fields="fields">
         <!-- <b-table small hover striped :items="userList" :fields="fields"> -->
         <template #cell(Historylog)="row">
           {{ row.item.Historylog && row.item.Historylog.name }}
         </template>
         <template #cell(createdAt)="row">
           {{ row.item.createdAt.substring(0, 10) }}
-        </template>
-        <template #cell(updateBtn)="row">
-          <b-button size="sm" variant="success" @click="onClickEdit(row.item.id)">수정</b-button>
-        </template>
-        <template #cell(deleteBtn)="row">
-          <b-button size="sm" variant="danger" @click="onClickDelete(row.item.id)">삭제</b-button>
         </template>
       </b-table>
     </div>
@@ -46,7 +40,6 @@
 
 <script>
 import inform from './user/inform.vue'
-
 
 $(document).ready(function () {
   $('.input-daterange').datepicker({
@@ -64,12 +57,12 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'number', label: '번호' },
+        { key: 'id', label: '번호' },
         { key: 'date', label: '날짜' },
-        { key: 'normal', label: '양품개수' },
-        { key: 'defect', label: '불량품개수' },
-        { key: 'total', label: '총생산량' },
-        { key: 'user', label: '작업자' }
+        { key: 'goods', label: '양품개수' },
+        { key: 'defective', label: '불량품개수' },
+        { key: 'inputP', label: '총생산량' },
+        { key: 'name', label: '작업자' }
       ],
       search: {
         name: null,
@@ -79,7 +72,7 @@ export default {
       endDate: '',
       dateString: '',
       value: '',
-      value2: '',
+      value2: ''
     }
   },
   computed: {
@@ -102,7 +95,7 @@ export default {
   methods: {
     searchHistoryList() {
       this.$store.dispatch('actHistoryList', this.search)
-    },
+    }
   }
 }
 </script>
