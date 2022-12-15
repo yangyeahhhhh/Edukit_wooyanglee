@@ -24,14 +24,15 @@ const dao = {
     if (params.startDate) {
       setQuery.where = { // setQuery = { where : }
         ...setQuery.where,
-        date: { [Op.like]: `%${params.startDate}%` }, // like검색
+        // date: { [Op.like]: `%${params.startDate}%` }, // like검색
+        date: { [Op.gte]: `%${params.startDate}%` }, // like검색
       };
       console.log('가', setQuery)
     }
     // if (params.endDate) {
     //   setQuery.where = {
     //     ...setQuery.where,
-    //     date: params.endDate, // '='검색
+    //     date: { [Op.like]: `%${params.endDate}%` }, // '='검색
     //   };
     //   console.log('나', setQuery)
     // }
