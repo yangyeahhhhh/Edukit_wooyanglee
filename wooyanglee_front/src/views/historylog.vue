@@ -7,14 +7,14 @@
             <div class="input-group input-daterange">
               <input
                 id="example-datepicker"
-                v-model="value"
+                v-model="search.startDate"
                 type="date"
                 class="form-control input1"
                 placeholder="Start Date"
               />
-              <input v-model="value2" type="date" class="form-control input2" placeholder="End Date" />
+              <input v-model="search.endDate" type="date" class="form-control input2" placeholder="End Date" />
               <div>
-                <b-button size="md" variant="success" @click="postDate()">조회</b-button>
+                <b-button size="md" variant="success" @click="searchHistoryList()">조회</b-button>
               </div>
               <!-- <p>start: '{{ value }}, {{ value2 }}' </p> -->
             </div>
@@ -23,7 +23,16 @@
       </form>
     </div>
     <div>
-      <b-table small hover striped :items="historyList" :fields="fields">
+      <b-table
+        id="my-table"
+        small
+        hover
+        striped
+        :items="historyList"
+        :fields="fields"
+        :per-page="perPage"
+        :current-page="currentPage"
+      >
         <!-- <b-table small hover striped :items="userList" :fields="fields"> -->
         <template #cell(Historylog)="row">
           {{ row.item.Historylog && row.item.Historylog.name }}
@@ -32,6 +41,10 @@
           {{ row.item.createdAt.substring(0, 10) }}
         </template>
       </b-table>
+      <div class="pagination justify-content-center">
+        <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="my-table">
+        </b-pagination>
+      </div>
     </div>
     <!-- inform 영역 -->
     <inform />
@@ -41,14 +54,14 @@
 <script>
 import inform from './user/inform.vue'
 
-$(document).ready(function () {
-  $('.input-daterange').datepicker({
-    format: 'yyyy-mm-dd',
-    autoclose: true,
-    language: 'ko',
-    endDate: '+1d' // 오늘 이후로는 날짜 선택 불가능
-  })
-})
+// $(document).ready(function () {
+//   $('.input-daterange').datepicker({
+//     format: 'yyyy-mm-dd',
+//     autoclose: true,
+//     language: 'ko',
+//     endDate: '+1d' // 오늘 이후로는 날짜 선택 불가능
+//   })
+// })
 
 export default {
   components: {
@@ -56,6 +69,8 @@ export default {
   },
   data() {
     return {
+      perPage: 10,
+      currentPage: 1,
       fields: [
         { key: 'id', label: '번호' },
         { key: 'date', label: '날짜' },
@@ -65,8 +80,8 @@ export default {
         { key: 'name', label: '작업자' }
       ],
       search: {
-        name: null,
-        historyid: null
+        startDate: null,
+        endDate: null
       },
       startDate: '',
       endDate: '',
@@ -87,6 +102,9 @@ export default {
     },
     deletedResult() {
       return this.$store.getters.HistoryDeletedResult
+    },
+    rows() {
+      return this.historyList.length
     }
   },
   created() {

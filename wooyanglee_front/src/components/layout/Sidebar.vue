@@ -86,7 +86,7 @@ nav {
   top: 0;
   left: 0;
   background: transparent;
-  height: 600px;
+  height: 100vh;
   background-color: #dc143c;
 }
 

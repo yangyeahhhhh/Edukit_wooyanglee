@@ -419,6 +419,7 @@ export default {
 .inline {
   text-align: center;
   align-items: center;
+
 }
 #doughnut {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -431,5 +432,6 @@ export default {
 .doughnut2 {
   /* background-color: yellow; */
   width: 20vw;
+
 }
 </style>
