@@ -53,7 +53,7 @@
           <div>
             1호기
             <p>
-              {{ plc.motion1 === true ? 'ON' : 'OFF' }}
+              <!-- {{ plc.motion1 === true ? 'ON' : 'OFF' }} -->
               <i v-if="plc.motion1 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
               <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
             </p>
@@ -68,7 +68,7 @@
           <div>
             2호기
             <p>
-              {{ plc.motion2 === true ? 'ON' : 'OFF' }}
+              <!-- {{ plc.motion2 === true ? 'ON' : 'OFF' }} -->
               <i v-if="plc.motion2 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
               <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
             </p>
@@ -76,7 +76,7 @@
           <div>
             3호기
             <p>
-              {{ plc.motion3 === true ? 'ON' : 'OFF' }}
+              <!-- {{ plc.motion3 === true ? 'ON' : 'OFF' }} -->
               <i v-if="plc.motion3 === true" class="bi bi-circle-fill" style="color: #e4a11b"></i>
               <i v-else class="bi bi-circle-fill" style="color: #332d2d"></i>
             </p>
@@ -261,6 +261,11 @@ export default {
         this.plc.motion2 = inventoryCheck[2].value
         this.plc.motion3 = inventoryCheck[4].value
         console.log('ㅋㅋㅋㅋㅋㅋㅋㅋㅋ', inventoryCheck)
+        if (this.plc.no1inventorycheck == false) {
+          if (this.stockmessage == true) {
+            alert('재고를 채워주세요')
+          }
+        }
 
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거

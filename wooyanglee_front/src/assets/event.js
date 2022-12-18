@@ -10,7 +10,7 @@ class Event {
     let scene = new Scene('edukit')
 
     const eventElement = document.createElement('div')
-
+    eventElement.setAttribute('id', 'mqttpage')
     const inputAddressElement = eventElement.appendChild(document.createElement('input'))
     inputAddressElement.placeholder = 'MQTT Host 입력'
 

@@ -114,7 +114,7 @@ export default {
 
     this.setDefaultValues() // 기본값 세팅
 
-    // this.$store.dispatch('actDepartmentList') // 부서정보 조회
+    this.$store.dispatch('actDepartmentList') // 부서정보 조회
   },
   methods: {
     onSubmit() {

@@ -30,6 +30,10 @@ const routes = [
       {
         path: '/historylog',
         component: () => import('../views/historylog')
+      },
+      {
+        path: '/department',
+        component: () => import('../views/department')
       }
     ]
   },
@@ -48,6 +52,10 @@ const routes = [
         meta: { header: false, noLogin: true }
       }
     ]
+  },
+  {
+    path: '/full',
+    component: () => import('../views/full')
   },
   {
     path: '*',
