@@ -210,7 +210,7 @@ export default {
       this.today = `${years}/${months}/${dates}`
       document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
     }, 10) // 1초마다 함수 실행되도록 설정
-    this.makeChartData2()
+    this.makeChartData2() 
     this.timerInterval2 = setInterval(() => {
       const now = new Date()
       let years = now.getFullYear()
@@ -318,10 +318,10 @@ export default {
       // 메세지 실시간 수신
       mqttClient.on('message', (topic, message) => {
         const mqttData = JSON.parse(message) // json string으로만 받을 수 있음
-        console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨!
-        // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
-        console.log(mqttData.Wrapper[15].value) // 나나 // 3호기 x축값 예상
-        // console.log(mqttData.Wrapper[40].name) // 나나 // DataTime 예상
+        // console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨!
+        // // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
+        // console.log('이거머야',mqttData.Wrapper[15].value) // 나나 // 3호기 x축값 예상
+        // // console.log(mqttData.Wrapper[40].name) // 나나 // DataTime 예상
 
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거
@@ -413,7 +413,7 @@ export default {
       // this.chartDatasetLabels2 = Array.from(new Set(datasetLabels2)) // 중복 제거 차트 데이터 생성
       this.chartData2 = {
         labels: this.chartLabels2,
-        datasets: this.makeDatasetDatas2() //여기에 [tagId17, tagId15 - tagId17] 들어와야함 
+        datasets: this.makeDatasetDatas2()
       }
     },
     makeChartLabels2(mqttData) {
