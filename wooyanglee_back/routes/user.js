@@ -8,10 +8,11 @@ const userService = require('../service/userService');
 router.post('/', async (req, res) => {
   try {
     const params = {
-      // departmentId: req.body.departmentId,
+      departmentId: req.body.departmentId,
       name: req.body.name,
       userid: req.body.userid,
       password: req.body.password,
+      department: req.body.department,
       role: req.body.role,
       email: req.body.email,
       phone: req.body.phone,

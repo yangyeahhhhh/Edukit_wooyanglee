@@ -1,9 +1,11 @@
 const express = require('express');
 const logger = require('../lib/logger');
 const authRouter = require('./auth');
-// const departmentRouter = require('./department');
 const userRouter = require('./user');
+const departmentRouter = require('./department');
 const historyRouter = require('./history');
+// const dashboardRouter = require('./dashboard');
+
 // const deviceRouter = require('./device');
 
 const router = express.Router();
@@ -27,6 +29,7 @@ router.get('/log-test', (req, res, next) => {
 
 router.use('/auths', authRouter);
 router.use('/users', userRouter);
+router.use('/departments', departmentRouter);
 router.use('/history', historyRouter);
 // router.use('/devices', deviceRouter);
 

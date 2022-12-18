@@ -1,19 +1,43 @@
 const { Op } = require('sequelize');
-// const { User, Department } = require('../models/index');
-const { User } = require('../models/index');
+const { User, Department } = require('../models/index');
+// const { User } = require('../models/index');
 
 const dao = {
   // 등록
   insert(params) {
     return new Promise((resolve, reject) => {
-      User.create(params).then((inserted) => {
-        // password는 제외하고 리턴함
-        const insertedResult = { ...inserted };
-        delete insertedResult.dataValues.password;
-        resolve(inserted);
+      Department.findOne({
+        attributes: ['name'],
+        where: {
+          id: params.departmentId
+        }
+      }).then((depName) => {
+        console.log("depName확인1", depName.dataValues.name)
+        params.department = depName.dataValues.name;
+        console.log("params확인2", params)
+        // resolve(depName);
+        User.create(params).then((inserted) => {
+          // password는 제외하고 리턴함
+          console.log("inserted확인3", inserted)
+          const insertedResult = { ...inserted };
+          delete insertedResult.dataValues.password;
+          resolve(inserted);
+        }).catch((err) => {
+          reject(err);
+        });
       }).catch((err) => {
         reject(err);
       });
+
+      // User.create(params).then((inserted) => {
+      //   // password는 제외하고 리턴함
+      //   console.log("inserted확인3", inserted)
+      //   const insertedResult = { ...inserted };
+      //   delete insertedResult.dataValues.password;
+      //   resolve(inserted);
+      // }).catch((err) => {
+      //   reject(err);
+      // });
     });
   },
   // 리스트 조회
@@ -43,7 +67,7 @@ const dao = {
         // include: [
         //   {
         //     model: Department,
-        //     as: 'Department',
+        //     // as: 'Department',
         //   },
         // ],
       }).then((selectedList) => {
@@ -60,6 +84,12 @@ const dao = {
         params.id,
         {
           attributes: { exclude: ['password'] }, // password 필드 제외
+          include: [
+            {
+              model: Department,
+              // as: 'Department',
+            },
+          ],
         },
       ).then((selectedInfo) => {
         resolve(selectedInfo);

@@ -3,14 +3,14 @@ const { User } = require('../models/index');
 const { Dashboard, History } = require('../models/index');
 
 const dao = {
-  // 등록
+  // 히스토리 데이터 등록
   insert(params) {
     return new Promise((resolve, reject) => {
       History.create(params).then((inserted) => {
         // password는 제외하고 리턴함
         const insertedResult = { ...inserted };
-        delete insertedResult.dataValues.password;
-        resolve(inserted);
+        // delete insertedResult.dataValues.password;
+        resolve(insertedResult);
       }).catch((err) => {
         reject(err);
       });
@@ -19,44 +19,67 @@ const dao = {
   // 리스트 조회
   selectList(params) {
     // where 검색 조건을 setQuery에 담음
-    // setQuery : JS
+    let startDate2 = new Date(params.startDate)
+    let endDate2 = new Date(params.endDate)
+    console.log("뉴데이타 확인", startDate2)
     const setQuery = {};
-    if (params.startDate) {
-      setQuery.where = { // setQuery = { where : }
-        ...setQuery.where,
-        date: { [Op.like]: `%${params.startDate}%` }, // like검색
-      };
-      console.log('가', setQuery)
-    }
-    // if (params.endDate) {
-    //   setQuery.where = {
-    //     ...setQuery.where,
-    //     date: params.endDate, // '='검색
-    //   };
-    //   console.log('나', setQuery)
-    // }
-    
-    // order by 정렬 조건
-    setQuery.order = [['id', 'DESC']];
-    console.log('다', setQuery)
-    
-    return new Promise((resolve, reject) => {
-      History.findAndCountAll({
-        ...setQuery,
-        // attributes: { exclude: ['password'] }, // password 필드 제외
-        // include: [
-        //   {
-        //     model: Department,
-        //     as: 'Department',
-        //   },
-        // ],
-      }).then((selectedList) => {
-        resolve(selectedList);
-      }).catch((err) => {
-        reject(err);
+    if(params.startDate && params.endDate){
+         
+      if (startDate2 >= endDate2) {
+        setQuery.where = { 
+          ...setQuery.where,
+          date: { [Op.and]: [
+            { [Op.gte]: endDate2 },
+            { [Op.lte]: startDate2}
+          ] }
+        }
+      }
+      else{
+        setQuery.where = { 
+          ...setQuery.where,
+          date: { [Op.and]: [
+            { [Op.gte]: startDate2},
+            { [Op.lte]: endDate2}
+          ] }, 
+        }
+      }
+
+        // order by 정렬 조건
+      setQuery.order = [['date', 'DESC']];
+      console.log('다', setQuery)
+      
+      return new Promise((resolve, reject) => {
+        History.findAndCountAll({
+          ...setQuery,
+        }).then((selectedList) => {
+          resolve(selectedList);
+        }).catch((err) => {
+          reject(err);
+        });
       });
-    });
+      
+    }else{ 
+      // order by 정렬 조건
+      setQuery.order = [['date', 'DESC']];
+      console.log('데이터가 없을 때', setQuery)
+      
+      return new Promise((resolve, reject) => {
+        History.findAndCountAll({
+           ...setQuery,
+        }).then((selectedList) => {
+          resolve(selectedList);
+        }).catch((err) => {
+          reject(err);
+        });
+      });
+      
+    }
+      
+    
+    
   },
+
+  
   // 상세정보 조회
   selectInfo(params) {
     return new Promise((resolve, reject) => {
