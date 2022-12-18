@@ -13,7 +13,7 @@
        <div>
           <div class="doughnut2" >
               <div class="Chart">
-                <doughnut-chart ref="skills_chart" :chart-data="chartData" :options="options"></doughnut-chart>
+                <doughnut-chart ref="skills_chart" :chart-data="chartData2" :options="options" style="width: 500px"></doughnut-chart>
               </div>
           </div>
         </div>
@@ -153,12 +153,15 @@ export default {
           ]
         },
       },
-      chartData: {
-        labels: ['skill1'],
-        datasets: [
+      chartData2: {
+        tagId: 21,
+        name: 'No3Motor1',
+        // labels: ['skill1'],
+        tagList2: ['양품수'],
+        datasets2: [
           {
-            backgroundColor: [randomColor()],
-            data: [1]
+            backgroundColor: [randomColor(), randomColor()],
+            data: [1, 2]
           }
         ]
       },
@@ -182,15 +185,33 @@ export default {
       chartData: null, // 차트로 표현될 데이터
       chartLabels: [], // 차트에서 사용할 라벨 리스트(가로축 라벨)
       chartDatasetLabels: [], // 차트에서 사용할 데이터셋 라벨 리스트
-      chartDatasetDataList: [] // 차트에서 사용할 데이터셋 데이터 리스트
+      chartDatasetDataList: [], // 차트에서 사용할 데이터셋 데이터 리스트
+      //////
+      today2: '',
+      maxDataLength2: 10, // TODO: 현재 차트에서 출력할 데이터의 최대크기(화면에서 입력 가능하도록 한다.)
+      mqttDataList2: [], // mqtt를 통해 받은 데이터(리스트로 계속 추가됨)
+      chartData2: null, // 차트로 표현될 데이터
+      chartLabels2: [], // 차트에서 사용할 라벨 리스트(가로축 라벨)
+      chartDatasetLabels2: [], // 차트에서 사용할 데이터셋 라벨 리스트
+      chartDatasetDataList2: [] // 차트에서 사용할 데이터셋 데이터 리스트
     }
   },
   created() {
     this.createMqtt()
+    this.createMqtt2()
   },
   mounted() {
     this.makeChartData()
     this.timerInterval = setInterval(() => {
+      const now = new Date()
+      let years = now.getFullYear()
+      let months = now.getMonth() + 1
+      let dates = now.getDate()
+      this.today = `${years}/${months}/${dates}`
+      document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
+    }, 10) // 1초마다 함수 실행되도록 설정
+    this.makeChartData2() 
+    this.timerInterval2 = setInterval(() => {
       const now = new Date()
       let years = now.getFullYear()
       let months = now.getMonth() + 1
@@ -203,11 +224,11 @@ export default {
     //setInterval(계속 반복된 함수를 지워주는 함수)
     clearInterval(this.timerInterval)
   },
-  computed: {
-    currentDataSet () {
-      return this.chartData.datasets[0].data
-    }
-  },
+  // computed: {
+  //   currentDataSet () {
+  //     return this.chartData.datasets[0].data
+  //   }
+  // },
   methods: {
     createMqtt() {
       // mqtt연결
@@ -285,11 +306,58 @@ export default {
         }
       })
     },
+    createMqtt2() {
+      // mqtt연결
+      const mqttClient = mqtt.connect(process.env.VUE_APP_MQTT)
+
+      mqttClient.on('connect', () => {
+        // mqtt연결 시 구독한다.
+        const topic = 'wylEdukit' // 구독할 topic
+        mqttClient.subscribe(topic, {}, (error, res) => {
+          if (error) {
+            console.error('mqtt client error', error)
+          }
+        })
+      })
+
+      // 메세지 실시간 수신
+      mqttClient.on('message', (topic, message) => {
+        const mqttData = JSON.parse(message) // json string으로만 받을 수 있음
+        // console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨!
+        // // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
+        // console.log('이거머야',mqttData.Wrapper[15].value) // 나나 // 3호기 x축값 예상
+        // // console.log(mqttData.Wrapper[40].name) // 나나 // DataTime 예상
+
+        // 선택된 devicdId만 수용함
+        this.removeOldData() // 오래된 데이터 제거
+
+        this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
+
+        this.makeChartLabels2(mqttData) // 차트라벨 생성
+        this.makeChartData2() // 차트용 데이터 작성
+
+        if (this.selected.deviceId === mqttData.id) {
+          this.removeOldData() // 오래된 데이터 제거
+
+          this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
+
+          this.makeChartLabels2(mqttData) // 차트라벨 생성
+          this.makeChartData2() // 차트용 데이터 작성
+        }
+      })
+    },
     removeOldData() {
       // 현재 차트에 출력할 수가 x개를 넘어서면 제일 오래된 데이터를 제거 한다.
       if (this.maxDataLength - 1 < this.mqttDataList.length) {
         this.mqttDataList.shift() // mqttData제거
         this.chartLabels.shift() // 차트라벨 제거
+      }
+    },
+     removeOldData2() {
+      // 현재 차트에 출력할 수가 x개를 넘어서면 제일 오래된 데이터를 제거 한다.
+      if (this.maxDataLength - 1 < this.mqttDataList.length) {
+        this.mqttDataList.shift() // mqttData제거
+        this.chartLabels2.shift() // 차트라벨 제거
       }
     },
     makeChartData() {
@@ -325,6 +393,39 @@ export default {
       this.chartLabels.push(mqttData.Wrapper[40].value.substring(11, 19))
       // datetime을 사용한다.(분:초만 추출함)
     },
+    makeChartData2() {
+      // 차트용 데이터 생성
+      // mqtt정보가 없으면 기본 그래프를 그려준다.(이것이 없으면 그래프 자체가 나오지 않음)
+      if (this.mqttDataList.length === 0) {
+        this.chartData2 = {
+          labels: ['전체생산량', '양품개수'],
+          datasets: [
+            {
+              label: 'no data',
+              backgroundColor: [randomColor(), randomColor()],
+              data: [1, 2]
+            },
+          ]
+        }
+        return
+      }
+      // 데이터셋 라벨 리스트 생성(태그 리스트(tagList)를 데이터셋 라벨로 사용한다.)
+      const datasetLabels2 = []
+      for (let i = 0; i < this.selected.tagList.length; i += 1) {
+        const tagName = this.selected.tagList[i] // tagName을 추출함
+        datasetLabels2.push(tagName) // tagName을 라벨로 사용함
+      }
+      // this.chartDatasetLabels2 = Array.from(new Set(datasetLabels2)) // 중복 제거 차트 데이터 생성
+      this.chartData2 = {
+        labels: this.chartLabels2,
+        datasets: this.makeDatasetDatas2()
+      }
+    },
+    makeChartLabels2(mqttData) {
+      // 차트라벨(가로측) 생성
+      this.chartLabels.push(mqttData.Wrapper[40].value.substring(11, 19))
+      // datetime을 사용한다.(분:초만 추출함)
+    },
     makeDatasetDatas() {
       // 데이터셋의 데이터 추출
       const datasetDatas = []
@@ -351,17 +452,43 @@ export default {
         return { ...item, borderColor: color }
       })
     },
-    updateChart () {
-      this.$refs.skills_chart.update();
+    makeDatasetDatas2() {
+      // 데이터셋의 데이터 추출
+      const datasetDatas2 = []
+
+      for (let i = 0; i < this.chartDatasetLabels2.length; i += 1) {
+        const label2 = this.chartDatasetLabels2[i] // label을 하나씩 추출한다.
+        const datas2 = [] // 해당 label에 속한 데이터셋의 데이터 리스트
+
+        // mqtt로 들어온 데이터에서 key값으로 사용된 tag와 현재 label이 같으면 해당 데이터를 추출 한다.
+        for (let j = 0; j < this.mqttDataList.length; j += 1) {
+          const mqttData = this.mqttDataList[j]
+          // const tagData = mqttData[label] // 현재 데이터셋 label과 같은 태그만 추출한다.
+          const tagData = mqttData.Wrapper[31].value // 현재 데이터셋 label과 같은 태그만 추출한다.
+          datas.push(tagData)
+        }
+        datasetDatas.push({
+          label2: label2,
+          fill: false,
+          data2: datas2
+        })
+      }
+      return datasetDatas2.map((item, idx) => {
+        const color = idx === 0 ? '#e74c3c' : '#3ce753'
+        return { ...item, borderColor: color }
+      })
     },
-    updateAmount (amount, index) {
-      this.chartData.datasets[0].data.splice(index, 1, amount)
-      this.updateChart();
-    },
-    updateName (text, index) {
-      this.chartData.labels.splice(index, 1, text)
-      this.updateChart();
-    },
+    // updateChart () {
+    //   this.$refs.skills_chart.update();
+    // },
+    // updateAmount (amount, index) {
+    //   this.chartData.datasets[0].data.splice(index, 1, amount)
+    //   this.updateChart();
+    // },
+    // updateName (text, index) {
+    //   this.chartData.labels.splice(index, 1, text)
+    //   this.updateChart();
+    // },
   }
 }
 </script>
@@ -378,13 +505,16 @@ export default {
   width: 100%;
   background-color: blueviolet;
   grid-gap: 3%;
+  padding-bottom: 10%;
+
 }
 .grid-chart {
   display: grid;
   width: 100%;
   background-color: blue;
   grid-template-columns: 70% 30%;
-  grid-gap: 3%;
+  /* padding-bottom: 10%; */
+  /* grid-gap: 3%; */
 }
 .grid-home {
   display: grid;
@@ -402,7 +532,7 @@ export default {
   font-size: 15px;
   width: 100%;
   background-color: #eee;
-  /* border: 5px solid red; */
+  border: 5px solid red;
   border-radius: 40px 40px;
 }
 .grid-state3 {
@@ -433,10 +563,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
-}
-.doughnut2 {
-  /* background-color: yellow; */
-  width: 20vw;
-
 }
 </style>
