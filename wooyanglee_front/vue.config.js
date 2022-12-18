@@ -1,6 +1,5 @@
 const { VUE_APP_SERVER } = process.env
 
-
 module.exports = {
   devServer: {
     proxy: {
