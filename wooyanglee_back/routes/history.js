@@ -7,6 +7,36 @@ const historyService = require('../service/historyService');
 
 // 등록 : history페이지 접속시 생성?
 //      vs 대쉬보드에서 확인 누르면 그때 생성?
+router.post('/', async (req, res) => {
+  try {
+    const params = {
+      date: req.body.date,
+      goods: req.body.goods,
+      defective: req.body.defective,
+      inputP: req.body.inputP,
+      name: req.body.name,
+    };
+    logger.info(`(history.reg.params) ${JSON.stringify(params)}`);
+
+    // // 입력값 null 체크
+    // if (!params.name || !params.userid || !params.password) {
+    //   const err = new Error('Not allowed null (name, userid, password)');
+    //   logger.error(err.toString());
+
+    //   res.status(500).json({ err: err.toString() });
+    // }
+
+    // 비즈니스 로직 호출
+    const result = await historyService.reg(params);
+    logger.info(`(history.reg.result) ${JSON.stringify(result)}`);
+
+    // 최종 응답
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(500).json({ err: err.toString() });
+  }
+});
+
 
 // 모두조회
 router.get('/', async (req, res) => {
@@ -16,11 +46,11 @@ router.get('/', async (req, res) => {
       startDate: req.query.startDate,
       endDate: req.query.endDate,
     };
-    logger.info(`(user.list.params) ${JSON.stringify(params)}`);
+    logger.info(`(history.list.params) ${JSON.stringify(params)}`);
 
     // DB에서 찾아서 result에 넣음
     const result = await historyService.list(params);
-    logger.info(`(user.list.result) ${JSON.stringify(result)}`);
+    logger.info(`(history.list.result) ${JSON.stringify(result)}`);
 
     // 최종 응답
     res.status(200).json(result);
@@ -29,7 +59,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 날짜로 조회
+// inform 창 (필요없음)
 router.get('/:id', async (req, res) => {
   try {
     const params = {

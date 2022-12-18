@@ -4,7 +4,7 @@ module.exports = class History extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       date: { // "날짜" // from Dashboard
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
         allowNull: true,
       },
       goods: { // "양품개수"  // 2호기count <<< No2Count, tagId: '16'

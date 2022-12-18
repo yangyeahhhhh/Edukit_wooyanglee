@@ -20,8 +20,9 @@ client.on('message', (wylEdukit, payload) => {
   //0 15 16 17 36 14 35
   // if(data[0].value != undefined && data[1].value != undefined && data[2].value != undefined && data[3].value != undefined){
   if(data != undefined && data[0].value != undefined){
-    console.log(mqttMsg.Wrapper)
-    console.log('컬러센서', data[0].value)
+    // console.log(mqttMsg.Wrapper)
+    // console.log(data)
+    // console.log('뭐임data[4].value', data[4].value)
 
     // if 문 :  1호기 또는 2호기 또는 3호기 작동중일때 DB저장 쿼리 실행.
     if( mqttMsg.Wrapper[5].value == true || mqttMsg.Wrapper[2].value == true || mqttMsg.Wrapper[16].value == true || mqttMsg.Wrapper[28].value == true ){    
@@ -59,6 +60,28 @@ client.on('message', (wylEdukit, payload) => {
             eStop: data[1].value,
           }
         });
+
+        if(data[4].value == 3){
+          console.log("ifmoon 들어왔셈")
+          let data123 = data[3].value - data[4].value
+          History.findOrCreate({
+            where : {
+              date : new Date(data[7].value),
+              goods: data[5].value,
+              defective: data123,            
+              inputP: data[3].value,
+              name: data[5].name
+            },
+          default : {
+            date : new Date(data[7].value),
+            goods: data[5].value,
+            defective: data123,            
+            inputP: data[3].value,
+            name: data[5].name
+          }
+          })
+        }
+      
       }
     }     
 })

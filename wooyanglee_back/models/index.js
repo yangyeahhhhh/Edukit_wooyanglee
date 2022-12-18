@@ -1,6 +1,7 @@
 const { sequelize } = require('./connection');
-const Dashboard = require('./dashboard');
 const User = require('./user');
+const Department = require('./department');
+const Dashboard = require('./dashboard');
 const History = require('./history');
 
 const db = {};
@@ -9,11 +10,13 @@ db.sequelize = sequelize;
 
 // model 생성
 db.User = User;
+db.Department = Department;
 db.Dashboard = Dashboard;
 db.History = History;
 
 // model init
 User.init(sequelize);
+Department.init(sequelize);
 Dashboard.init(sequelize);
 History.init(sequelize);
 

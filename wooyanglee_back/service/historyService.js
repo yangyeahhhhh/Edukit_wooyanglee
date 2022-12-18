@@ -9,29 +9,17 @@ const service = {
   async reg(params) {
     let inserted = null;
 
-    // 1. 비밀번호 암호화
-    let hashPassword = null;
-    try {
-      hashPassword = await hashUtil.makePasswordHash(params.password);
-      logger.debug(`(userService.makePassword) ${JSON.stringify(params.password)}`);
-    } catch (err) {
-      logger.error(`(userService.makePassword) ${err.toString()}`);
-      return new Promise((resolve, reject) => {
-        reject(err);
-      });
-    }
-
-    // 2. 사용자 등록 처리
-    const newParams = {
-      ...params,
-      password: hashPassword,
-    };
+    // // 2. 사용자 등록 처리
+    // const newParams = {
+    //   ...params,
+    //   password: hashPassword,
+    // };
 
     try {
-      inserted = await userDao.insert(newParams);
-      logger.debug(`(userService.reg) ${JSON.stringify(inserted)}`);
+      inserted = await historyDao.insert(params);
+      logger.debug(`(historyService.reg) ${JSON.stringify(inserted)}`);
     } catch (err) {
-      logger.error(`(userService.reg) ${err.toString()}`);
+      logger.error(`(historyService.reg) ${err.toString()}`);
       return new Promise((resolve, reject) => {
         reject(err);
       });
@@ -50,9 +38,9 @@ const service = {
 
     try {
       result = await historyDao.selectList(params);
-      logger.debug(`(userService.list) ${JSON.stringify(result)}`);
+      logger.debug(`(historyService.list) ${JSON.stringify(result)}`);
     } catch (err) {
-      logger.error(`(userService.list) ${err.toString()}`);
+      logger.error(`(historyService.list) ${err.toString()}`);
       return new Promise((resolve, reject) => {
         reject(err);
       });
