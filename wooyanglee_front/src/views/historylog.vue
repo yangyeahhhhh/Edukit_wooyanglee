@@ -4,25 +4,19 @@
       <form autocomplete="off">
         <div class="flex-row d-flex justify-content-center right">
           <div class="col-md-5 col-11s">
-            <div class="input-group input-daterange">
-              <input
-                id="example-datepicker"
-                v-model="search.startDate"
-                type="date"
-                class="form-control input1"
-                placeholder="Start Date"
-              />
-              <input v-model="search.endDate" type="date" class="form-control input2" placeholder="End Date" />
-              <div>
-                <b-button size="md" variant="success" @click="searchHistoryList()">조회</b-button>
+            <div class="input-group input-daterange inputbox">
+              <input v-model="search.startDate" type="date" class="form-control input1" />
+              <input v-model="search.endDate" type="date" class="form-control input2" />
+              <div class="buttonstyle">
+                <b-button class="buttonstyle" size="md" variant="success" @click="searchHistoryList()">조회</b-button>
+                <b-button size="md" variant="success" @click="whole()">전체조회</b-button>
               </div>
-              <!-- <p>start: '{{ value }}, {{ value2 }}' </p> -->
             </div>
           </div>
         </div>
       </form>
     </div>
-    <div>
+    <div style="text-align: center">
       <b-table
         id="my-table"
         small
@@ -37,8 +31,8 @@
         <template #cell(Historylog)="row">
           {{ row.item.Historylog && row.item.Historylog.name }}
         </template>
-        <template #cell(createdAt)="row">
-          {{ row.item.createdAt.substring(0, 10) }}
+        <template #cell(date)="row">
+          {{ row.item.date.substring(0, 10) }}
         </template>
       </b-table>
       <div class="pagination justify-content-center">
@@ -72,7 +66,7 @@ export default {
       perPage: 10,
       currentPage: 1,
       fields: [
-        { key: 'id', label: '번호' },
+        { key: 'id', label: '작업번호' },
         { key: 'date', label: '날짜' },
         { key: 'goods', label: '양품개수' },
         { key: 'defective', label: '불량품개수' },
@@ -85,9 +79,7 @@ export default {
       },
       startDate: '',
       endDate: '',
-      dateString: '',
-      value: '',
-      value2: ''
+      dateString: ''
     }
   },
   computed: {
@@ -113,12 +105,24 @@ export default {
   methods: {
     searchHistoryList() {
       this.$store.dispatch('actHistoryList', this.search)
+    },
+    whole() {
+      this.$router.go()
     }
   }
 }
 </script>
 
 <style scoped>
+input[type='date']::before {
+  content: attr(data-placeholder);
+  width: 100%;
+}
+
+input[type='date']:focus::before,
+input[type='date']:valid::before {
+  display: none;
+}
 .right {
   justify-content: right !important;
 }
@@ -180,7 +184,7 @@ button:focus {
   outline-width: 0;
 }
 
-.datepicker {
+/* .datepicker {
   background-color: #388e3c;
   border-radius: 10;
   padding: 15px 20px !important;
@@ -209,7 +213,7 @@ span.focused {
 .datepicker table tr td.today.range {
   background-image: linear-gradient(#eeeeee, #388e3c) !important;
   border-radius: 50% !important;
-}
+} */
 
 /*Weekday title*/
 thead tr:nth-child(3) th {
@@ -282,7 +286,7 @@ thead tr:nth-child(3) th {
   opacity: 1;
 }
 
-@media screen and (max-width: 700px) {
+/* @media screen and (max-width: 700px) {
   .datepicker-dropdown.datepicker-orient-right:before {
     right: calc(50% - 6px) !important;
   }
@@ -290,5 +294,11 @@ thead tr:nth-child(3) th {
   .datepicker-dropdown.datepicker-orient-right:after {
     right: calc(50% - 5px) !important;
   }
+} */
+.inputbox {
+  width: 500px;
+}
+.buttonstyle {
+  margin: 5px;
 }
 </style>

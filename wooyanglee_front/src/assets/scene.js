@@ -24,9 +24,9 @@ class Scene {
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
 
-    // this.scene.add(this.resource.obj);
+    // this.scene.add(this.resource.obj)
 
-    // this.scene.add(this.light.ambientLight);
+    // this.scene.add(this.light.ambientLight)
 
     // this.scene.add(this.camera.camera);
     this.scene.add(this.resource.obj)

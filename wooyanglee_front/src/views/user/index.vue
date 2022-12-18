@@ -17,7 +17,7 @@
         </b-col>
       </b-row>
     </div>
-    <div>
+    <div style="text-align: center">
       <b-table
         id="user-table"
         small
@@ -29,7 +29,7 @@
         :current-page="currentPage"
       >
         <template #cell(Department)="row">
-          {{ row.item.Department && row.item.Department.name }}
+          {{ row.item.department }}
         </template>
         <template #cell(createdAt)="row">
           {{ row.item.createdAt.substring(0, 10) }}
