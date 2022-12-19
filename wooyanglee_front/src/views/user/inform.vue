@@ -24,15 +24,15 @@
         <b-form-group label="아이디" label-for="userid" label-cols="3">
           <b-form-input id="userid" v-model="user.userid"></b-form-input>
         </b-form-group>
-        <b-form-group label="비밀번호" label-for="password" label-cols="3">
+        <!-- <b-form-group label="비밀번호" label-for="password" label-cols="3">
           <b-form-input
             v-if="inputMode === 'insert'"
             id="password"
             v-model="user.password"
             type="password"
-          ></b-form-input>
-          <b-button v-if="inputMode === 'update'" variant="danger">비밀번호 변경</b-button>
-        </b-form-group>
+          ></b-form-input> -->
+        <!-- <b-button v-if="inputMode === 'update'" variant="danger">비밀번호 변경</b-button> -->
+        <!-- </b-form-group> -->
         <b-form-group label="권한" label-for="auth" label-cols="3">
           <b-form-radio-group id="auth" v-model="user.role" :options="userRole.options" />
         </b-form-group>

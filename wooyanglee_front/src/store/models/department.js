@@ -112,25 +112,25 @@ export default {
       context.commit('setDepartment', { ...stateInit.Department })
 
       /* 테스트 데이터 세팅 */
-      setTimeout(() => {
-        const departmentList = [
-          { id: 1, name: '개발팀', code: 'dev', description: '개발팀 테스트', createdAt: '2021-12-01T00:00:00.000Z' },
-          { id: 2, name: '영업팀', code: 'sales', description: '영업팀 테스트', createdAt: '2021-12-01T00:00:00.000Z' }
-        ]
+      // setTimeout(() => {
+      //   const departmentList = [
+      //     { id: 1, name: '개발팀', code: 'dev', description: '개발팀 테스트', createdAt: '2021-12-01T00:00:00.000Z' },
+      //     { id: 2, name: '영업팀', code: 'sales', description: '영업팀 테스트', createdAt: '2021-12-01T00:00:00.000Z' }
+      //   ]
 
-        let department = { ...stateInit.Department }
-        for (let i = 0; i < departmentList.length; i += 1) {
-          if (payload === departmentList[i].id) {
-            department = { ...departmentList[i] }
-          }
-        }
-        context.commit('setDepartment', department)
-      }, 300)
+      //   let department = { ...stateInit.Department }
+      //   for (let i = 0; i < departmentList.length; i += 1) {
+      //     if (payload === departmentList[i].id) {
+      //       department = { ...departmentList[i] }
+      //     }
+      //   }
+      //   context.commit('setDepartment', department)
+      // }, 300)
 
       /* RestAPI 호출 */
 
       api.get(`/serverApi/departments/${payload}`).then(response => {
-        const department = response && response.department
+        const department = response && response.data
         context.commit('setDepartment', department)
       })
     },
@@ -138,7 +138,6 @@ export default {
     actDepartmentUpdate(context, payload) {
       // 상태값 초기화
       context.commit('setUpdatedResult', null)
-
       /* 테스트 데이터 세팅 */
       //   setTimeout(() => {
       //     const updatedResult = 1
@@ -146,9 +145,10 @@ export default {
       //   }, 300) // state값의 변화를 감지하기 위하여 일부러 지연 시켰다.
 
       /* RestAPI 호출 */
-
-      api.put(`/serverApi/departments/${payload}`).then(response => {
-        const updatedResult = response && response.updatedCount
+      api.put(`/serverApi/departments/${payload.id}`, payload).then(response => {
+        console.log('zz', response)
+        //const updatedResult = response && response.data.updatedCount && response.config.data
+        const updatedResult = response.data.updatedCount
         context.commit('setUpdatedResult', updatedResult)
       })
     },

@@ -4,8 +4,8 @@
     <div style="margin-bottom: 5px">
       <b-row>
         <b-col style="text-align: left">
-          <b-input-group class="mt-3">
-            <b-form-input v-model="search.name" placeholder="부서이름 검색"></b-form-input>
+          <b-input-group class="mt-3" style="width: 250px">
+            <b-form-input v-model="search.name" placeholder="부서 이름 검색"></b-form-input>
             <b-input-group-append>
               <b-button variant="primary" size="sm" @click="searchDepartmentList">검색</b-button>
             </b-input-group-append>
@@ -16,7 +16,7 @@
         </b-col>
       </b-row>
     </div>
-    <div>
+    <div style="text-align: center">
       <b-table small hover striped :items="departmentList" :fields="fields">
         <template #cell(createdAt)="row">
           {{ row.item.createdAt.substring(0, 10) }}
@@ -53,7 +53,7 @@ export default {
         { key: 'deleteBtn', label: '삭제' }
       ],
       search: {
-        namd: null
+        name: null
       }
     }
   },
@@ -115,6 +115,7 @@ export default {
           this.searchDepartmentList()
         } else {
           // 수정이 실패한 경우
+          console.log('왜실패', value)
           this.$bvToast.toast('수정이 실패하였습니다.', {
             title: 'ERROR',
             variant: 'danger',

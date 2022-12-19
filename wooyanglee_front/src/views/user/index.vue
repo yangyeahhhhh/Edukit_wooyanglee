@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1>사용자 관리</h1>
+    <h1>직원 관리</h1>
     <div style="margin-bottom: 5px">
       <b-row>
         <b-col style="text-align: left" cols="3">
-          <b-input-group class="mt-3">
+          <b-input-group class="mt-3" style="width: 250px">
             <b-form-input v-model="search.name" placeholder="이름 검색"></b-form-input>
-            <b-form-input v-model="search.userid" placeholder="아이디 검색"></b-form-input>
+            <!-- <b-form-input v-model="search.userid" placeholder="아이디 검색"></b-form-input> -->
             <b-input-group-append>
               <b-button variant="primary" size="sm" @click="searchUserList">검색</b-button>
             </b-input-group-append>

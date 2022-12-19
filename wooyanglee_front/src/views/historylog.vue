@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="container px-1 px-sm-5">
+    <h1>작업 내역</h1>
+    <div class="container px-1 px-sm-5" style="padding-top: 0px">
       <form autocomplete="off">
         <div class="flex-row d-flex justify-content-center right">
           <div class="col-md-5 col-11s">
