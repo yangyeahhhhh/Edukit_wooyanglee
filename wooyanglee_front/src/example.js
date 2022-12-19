@@ -13,7 +13,7 @@ import { Gui } from './plugins/gui'
 
 export default async element => {
   console.log(element)
-  element.style.width = '1600px'
+  element.style.width = '1430'
   element.style.height = '750px'
 
   // Scene Setting.

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="background">
     <div ref="webgl"></div>
   </div>
 </template>
@@ -16,4 +16,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+</style>
