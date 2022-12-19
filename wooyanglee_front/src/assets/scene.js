@@ -24,11 +24,6 @@ class Scene {
   setScene() {
     this.scene.background = new THREE.Color(0x101010)
 
-    // this.scene.add(this.resource.obj)
-
-    // this.scene.add(this.light.ambientLight)
-
-    // this.scene.add(this.camera.camera);
     this.scene.add(this.resource.obj)
 
     this.scene.add(this.light.ambientLight)
@@ -37,13 +32,13 @@ class Scene {
 
     this.scene.add(this.light.dirLight)
 
-    this.scene.add(this.trafficLight.trafficLight1)
-    this.scene.add(this.trafficLight.trafficLight2)
-    this.scene.add(this.trafficLight.trafficLight3)
-    this.scene.add(this.trafficLight.pillarTop1)
-    this.scene.add(this.trafficLight.pillarTop2)
-    this.scene.add(this.trafficLight.pillarFloor)
-    this.scene.add(this.trafficLight.pillar)
+    // this.scene.add(this.trafficLight.trafficLight1)
+    // this.scene.add(this.trafficLight.trafficLight2)
+    // this.scene.add(this.trafficLight.trafficLight3)
+    // this.scene.add(this.trafficLight.pillarTop1)
+    // this.scene.add(this.trafficLight.pillarTop2)
+    // this.scene.add(this.trafficLight.pillarFloor)
+    // this.scene.add(this.trafficLight.pillar)
   }
 
   setMesh() {

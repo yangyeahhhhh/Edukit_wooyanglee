@@ -1,501 +1,99 @@
 <template>
-  <div>
-    <div id="kriss-kringle">
-      <div id="container">
-        <span id="ho">Ho</span>
-        <div id="head">
-          <div id="face">
-            <div id="hat">
-              <div id="pompon"></div>
-              <div id="bar"></div>
-            </div>
-            <div id="glasses">
-              <div id="leg1"></div>
-              <div id="lens1">
-                <div id="eye1">
-                  <div id="reflection1"></div>
-                </div>
-              </div>
-              <div id="leg2"></div>
-              <div id="lens2">
-                <div id="eye2">
-                  <div id="reflection2"></div>
-                </div>
-              </div>
-              <div id="leg3"></div>
-            </div>
-            <div id="moustache">
-              <div id="moustache1"></div>
-              <div id="nose"></div>
-              <div id="moustache2"></div>
-            </div>
-            <div id="beard">
-              <div id="lip"></div>
-              <div id="mouth">
-                <div id="tongue"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="body">
-          <div id="bar2"></div>
-          <div id="belt">
-            <div id="square"></div>
-          </div>
-          <div id="bar3"></div>
-          <div id="left-arm">
-            <div id="bar4"></div>
-            <div id="left-hand"></div>
-          </div>
-          <div id="right-arm">
-            <div id="bar5"></div>
-            <div id="right-hand"></div>
-          </div>
-          <div id="align-foot">
-            <div id="left-leg">
-              <div id="bar6"></div>
-              <div id="left-foot"></div>
-            </div>
-            <div id="right-leg">
-              <div id="bar7"></div>
-              <div id="right-foot"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="wrapper">
+  <div class="cube">
+    <div class="one"></div>
+    <div class="two"></div>
+    <div class="three"></div>
+    <div class="four"></div>
+    <div class="five"></div>
+    <div class="six"></div>
   </div>
+</div>
 </template>
 
 <script>
-export default {}
+export default {
+
+}
 </script>
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-html,
-body {
-  width: 100%;
+<style>
+body, 
+html {
+  width: 100%; 
   height: 100%;
   overflow: hidden;
+  background: rgba(255,114,96,1);
+  background: linear-gradient(45deg, 
+    rgba(255,114,96,1) 0%, 
+    rgba(255,114,96,1) 14%, 
+    rgba(252,210,113,1) 54%, 
+    rgba(252,210,113,1) 61%, 
+    rgba(102,176,102,1) 93%, 
+    rgba(96,135,134,1) 100%);
 }
 
-body {
-  font-family: arial;
-  background: #596fec;
+.wrapper {
+  width: 100%;
+  perspective: 800;
 }
 
-#hat,
-#pompon,
-#bar,
-#glasses,
-#reflection1,
-#reflection2,
-#moustache,
-#moustache1,
-#moustache2,
-#beard,
-#lip,
-#mouth,
-#bar2,
-#square,
-#bar3,
-#bar4,
-#left-hand,
-#bar5,
-#right-hand,
-#bar6,
-#align-foot,
-#left-foot,
-#right-leg,
-#bar7,
-#right-foot {
+.cube {
   position: relative;
+  top: 160px;
+  margin: 0 auto;
+  height: 200px;
+  width: 200px;
+
+  animation : spin 5s infinite linear;
+  transform-style: preserve-3d;
 }
 
-#merry-christmas,
-#ho,
-#head,
-#tongue,
-#body,
-#belt,
-#left-arm,
-#right-arm {
+@keyframes spin {
+  from { transform: rotateY(0) rotateX(0); }
+  to   { transform: rotateY(-360deg) rotateX(360deg); }
+}
+
+.cube > div {
   position: absolute;
+  height: 200px;
+  width: 200px;
+  border: 1px solid #333;
+  opacity: .8;
 }
 
-#kriss-kringle {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+.cube > div:hover {
+  opacity: 1;
+  transition: opacity .3s linear;
 }
 
-#container {
-  width: 400px;
-  height: 0px;
-  z-index: 1;
+.one { 
+  transform: rotateX(90deg) translateZ(100px); 
+  background-color: #E3493B;
 }
 
-#ho {
-  color: #ffffff;
-  font-size: 20px;
-  right: 70px;
-  top: 70px;
-  opacity: 0;
-  animation: cheerUpHo 1s linear infinite;
+.two { 
+  transform: translateZ(100px); 
+  background-color: #23B5AF;
 }
 
-@keyframes cheerUpHo {
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    font-size: 50px;
-    top: -30px;
-    right: -30px;
-  }
+.three { 
+  transform: rotateY(90deg) translateZ(100px); 
+  background-color: #E8487F;
 }
 
-#head,
-#pompon {
-  border-radius: 50%;
+.four { 
+  transform: rotateY(180deg) translateZ(100px); 
+  background-color: #28B78D;
 }
 
-#head {
-  left: 50%;
-  transform: translateX(-50%) rotate(-10deg);
-  transform-origin: bottom;
-  animation: animateHead 3s linear infinite;
+.five { 
+  transform: rotateY(-90deg) translateZ(100px); 
+  background-color: #FF5B00;
 }
 
-@keyframes animateHead {
-  50% {
-    transform: translateX(-50%) rotate(10deg);
-  }
-}
-
-#face {
-  width: 150px;
-  height: 110px;
-  background: #dabb79;
-  border-radius: 50% 50% 0 0;
-}
-
-#hat {
-  width: 0;
-  border-right: 75px solid transparent;
-  border-left: 75px solid transparent;
-  border-bottom: 70px solid #ff0000;
-  top: -90px;
-}
-
-#pompon {
-  width: 40px;
-  height: 40px;
-  background: #ffffff;
-  top: 20px;
-  left: -20px;
-  box-shadow: inset 0 0 10px #d4d1d1;
-}
-
-#bar {
-  width: 160px;
-  height: 15px;
-  background: #ffffff;
-  border-radius: 10px;
-  top: 85px;
-  left: -80px;
-}
-
-#glasses {
-  width: 100%;
-  height: 35px;
-  top: -75px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#lens1,
-#lens2 {
-  width: 36px;
-  height: 35px;
-  border: 3px solid #747474;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#eye1,
-#eye2 {
-  width: 15px;
-  height: 20px;
-  background: #054d5f;
-  border-radius: 50%;
-}
-
-#reflection1,
-#reflection2 {
-  width: 5px;
-  height: 5px;
-  background: #ffffff;
-  border-radius: 50%;
-  top: 5px;
-  left: 5px;
-}
-
-#leg1,
-#leg2,
-#leg3 {
-  width: 26px;
-  height: 5px;
-  background: #747474;
-}
-
-#moustache {
-  display: flex;
-  justify-content: center;
-  top: -80px;
-}
-
-#moustache1,
-#moustache2 {
-  width: 70px;
-  height: 30px;
-  background: #ffffff;
-  border-radius: 50% 50%;
-  box-shadow: inset 0 0 10px #d4d1d1;
-}
-
-#moustache1 {
-  left: 20px;
-  top: 30px;
-  transform: rotate(-10deg);
-}
-
-#nose {
-  width: 50px;
-  height: 40px;
-  background: #dabb79;
-  border-radius: 50%;
-  z-index: 1;
-  border: 1px solid #bda269;
-}
-
-#moustache2 {
-  top: 30px;
-  left: -20px;
-  transform: rotate(10deg);
-}
-
-#beard {
-  width: 160px;
-  height: 170px;
-  background: #ffffff;
-  border-radius: 5px 5px 50% 50%;
-  top: -150px;
-  left: -5px;
-  z-index: -1;
-  box-shadow: inset 0 0 10px #575656;
-}
-
-#lip,
-#mouth {
-  width: 50px;
-  height: 7px;
-  background: #f0adad;
-  top: 80px;
-  left: 55px;
-  border-radius: 5px 5px 50% 50%;
-}
-
-#lip {
-  z-index: 1;
-}
-
-#mouth {
-  animation: cheerUpMouth 1s linear infinite;
-  overflow: hidden;
-}
-
-@keyframes cheerUpMouth {
-  50% {
-    height: 30px;
-  }
-}
-
-#tongue {
-  width: 100%;
-  height: 10px;
-  background: #ff0000;
-  border-radius: 50%;
-  bottom: 0;
-  border-radius: 5px 5px 50% 50%;
-}
-
-#body {
-  width: 400px;
-  height: 300px;
-  background: #ff0000;
-  top: 100px;
-  z-index: -2;
-  border-radius: 50% 50% 0 0;
-}
-
-#bar2 {
-  width: 30px;
-  height: 100%;
-  background: #ffffff;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#belt {
-  width: 100%;
-  height: 40px;
-  background: #000000;
-  bottom: 50px;
-}
-
-#square {
-  width: 50px;
-  height: 50px;
-  border: 10px solid #ffff00;
-  left: 50%;
-  top: -6px;
-  transform: translateX(-50%);
-}
-
-#bar3 {
-  height: 40px;
-  background: #ffffff;
-  border-radius: 0 0 20px 20px;
-}
-
-#left-arm {
-  width: 70px;
-  height: 120px;
-  background: #ff0000;
-  top: 100px;
-  left: 50px;
-  box-shadow: inset 0 0 10px #ca2020;
-  border-radius: 40px 40px 0 0;
-  transform: rotate(50deg);
-  animation: animateLeftArm 3.5s ease-in-out infinite;
-  transform-origin: top;
-}
-
-@keyframes animateLeftArm {
-  0% {
-    transform: rotate(50deg);
-  }
-
-  50% {
-    transform: rotate(180deg);
-  }
-}
-
-#bar4 {
-  height: 30px;
-  background: #ffffff;
-  top: 100%;
-}
-
-#left-hand {
-  height: 40px;
-  background: #dabb79;
-  border-radius: 0 0 20px 20px;
-  top: 100%;
-}
-
-#right-arm {
-  width: 70px;
-  height: 120px;
-  background: #ff0000;
-  top: 80px;
-  left: 320px;
-  box-shadow: inset 0 0 10px #ca2020;
-  border-radius: 40px 40px 0 0;
-  transform: rotate(-10deg);
-  animation: cheerUpRightArm 2.5s linear infinite;
-}
-
-@keyframes cheerUpRightArm {
-  0% {
-    transform: rotate(-10deg);
-  }
-
-  50% {
-    transform: rotate(-20deg);
-  }
-}
-
-#bar5 {
-  height: 30px;
-  background: #ffffff;
-  top: 100%;
-}
-
-#right-hand {
-  height: 40px;
-  background: #dabb79;
-  border-radius: 0 0 20px 20px;
-  top: 100%;
-}
-
-#left-leg {
-  width: 80px;
-  height: 50px;
-  background: #ff0000;
-}
-
-#bar6 {
-  height: 30px;
-  background: #ffffff;
-  top: 100%;
-}
-
-#align-foot {
-  left: 110px;
-}
-
-#left-foot {
-  width: 120px;
-  height: 50px;
-  background: #000000;
-  top: 100%;
-  left: -40px;
-  border-radius: 20px 0 10px 20px;
-}
-
-#right-leg {
-  width: 80px;
-  height: 50px;
-  background: #ff0000;
-  left: 100px;
-  top: -50px;
-}
-
-#bar7 {
-  height: 30px;
-  background: #ffffff;
-  top: 100%;
-}
-
-#right-foot {
-  width: 120px;
-  height: 50px;
-  background: #000000;
-  top: 100%;
-  left: 0px;
-  border-radius: 0 20px 20px 10px;
+.six { 
+  transform: rotateX(-90deg) translateZ(100px); 
+  background-color: #FF5B00;
 }
 </style>
