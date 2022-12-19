@@ -156,12 +156,12 @@ export default {
       chartData2: {
         tagId: 21,
         name: 'No3Motor1',
-        // labels: ['skill1'],
-        tagList2: ['양품수'],
+        labels2: ['양품수'],
+        // tagList2: ['양품수'],
         datasets2: [
           {
             backgroundColor: [randomColor(), randomColor()],
-            data: [1, 2]
+            data2: []
           }
         ]
       },
@@ -322,7 +322,7 @@ export default {
 
       // 메세지 실시간 수신
       mqttClient.on('message', (topic, message) => {
-        const mqttData = JSON.parse(message) // json string으로만 받을 수 있음
+        const mqttData2 = JSON.parse(message) // json string으로만 받을 수 있음
         // console.log(mqttData) // >> 요걸로 mqttData 확인하면 됨!
         // // 기존 예제코드와 달리 .Wrapper로 한번 더 뜯어서 써야함
         // console.log('이거머야',mqttData.Wrapper[15].value) // 나나 // 3호기 x축값 예상
@@ -331,17 +331,17 @@ export default {
         // 선택된 devicdId만 수용함
         this.removeOldData() // 오래된 데이터 제거
 
-        this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
+        this.mqttDataList.push(mqttData2) // 리스트에 계속 추가함
 
-        this.makeChartLabels2(mqttData) // 차트라벨 생성
+        this.makeChartLabels2(mqttData2) // 차트라벨 생성
         this.makeChartData2() // 차트용 데이터 작성
 
-        if (this.selected.deviceId === mqttData.id) {
+        if (this.selected.deviceId === mqttData2.id) {
           this.removeOldData() // 오래된 데이터 제거
 
-          this.mqttDataList.push(mqttData) // 리스트에 계속 추가함
+          this.mqttDataList.push(mqttData2) // 리스트에 계속 추가함
 
-          this.makeChartLabels2(mqttData) // 차트라벨 생성
+          this.makeChartLabels2(mqttData2) // 차트라벨 생성
           this.makeChartData2() // 차트용 데이터 작성
         }
       })
@@ -412,13 +412,13 @@ export default {
       // 데이터셋 라벨 리스트 생성(태그 리스트(tagList)를 데이터셋 라벨로 사용한다.)
       const datasetLabels2 = []
       for (let i = 0; i < this.selected.tagList.length; i += 1) {
-        const tagName = this.selected.tagList[i] // tagName을 추출함
-        datasetLabels2.push(tagName) // tagName을 라벨로 사용함
+        const tagName2 = this.selected.tagList[i] // tagName을 추출함
+        datasetLabels2.push(tagName2) // tagName을 라벨로 사용함
       }
-      // this.chartDatasetLabels2 = Array.from(new Set(datasetLabels2)) // 중복 제거 차트 데이터 생성
+      this.chartDatasetLabels2 = Array.from(new Set(datasetLabels2)) // 중복 제거 차트 데이터 생성
       this.chartData2 = {
-        labels: this.chartLabels2,
-        datasets: this.makeDatasetDatas2()
+        labels2: this.chartLabels2,
+        datasets2: this.makeDatasetDatas2()
       }
     },
     makeChartLabels2(mqttData) {
@@ -429,6 +429,7 @@ export default {
     makeDatasetDatas() {
       // 데이터셋의 데이터 추출
       const datasetDatas = []
+
 
       for (let i = 0; i < this.chartDatasetLabels.length; i += 1) {
         const label = this.chartDatasetLabels[i] // label을 하나씩 추출한다.
@@ -456,18 +457,20 @@ export default {
       // 데이터셋의 데이터 추출
       const datasetDatas2 = []
 
+      
       for (let i = 0; i < this.chartDatasetLabels2.length; i += 1) {
         const label2 = this.chartDatasetLabels2[i] // label을 하나씩 추출한다.
         const datas2 = [] // 해당 label에 속한 데이터셋의 데이터 리스트
+        console.log('멀까유', this.chartDatasetLabels2[i]); //양품수
 
         // mqtt로 들어온 데이터에서 key값으로 사용된 tag와 현재 label이 같으면 해당 데이터를 추출 한다.
         for (let j = 0; j < this.mqttDataList.length; j += 1) {
-          const mqttData = this.mqttDataList[j]
+          const mqttData2 = this.mqttDataList[j]
           // const tagData = mqttData[label] // 현재 데이터셋 label과 같은 태그만 추출한다.
-          const tagData = mqttData.Wrapper[31].value // 현재 데이터셋 label과 같은 태그만 추출한다.
-          datas.push(tagData)
+          const tagData2 = mqttData2.Wrapper[31].value // 현재 데이터셋 label과 같은 태그만 추출한다.
+          datas2.push(tagData2)
         }
-        datasetDatas.push({
+        datasetDatas2.push({
           label2: label2,
           fill: false,
           data2: datas2
@@ -506,7 +509,6 @@ export default {
   background-color: blueviolet;
   grid-gap: 3%;
   padding-bottom: 10%;
-
 }
 .grid-chart {
   display: grid;

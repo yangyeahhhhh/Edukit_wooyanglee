@@ -5,13 +5,13 @@ import { CinematicCamera } from 'three/examples/jsm/cameras/CinematicCamera'
 
 class Camera {
   constructor() {
-    this.camera = new CinematicCamera(1000, 1, 1, 2000)
+    this.camera = new CinematicCamera(1000, 1, 1, 3000)
 
     this.setCamera()
   }
 
   setCamera() {
-    this.camera.position.set(100, 100, 100)
+    this.camera.position.set(0, 80, 80) // (x,y,z)
   }
 
   get cameraElement() {
