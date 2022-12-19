@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="grid-state">
         <div class="grid-state2 inline">
           <h4>전원 상태</h4>
@@ -84,9 +84,10 @@
         </div>
 
         <!-- <div class="grid-state2">양품수:{{ plc.normal }}개 불량품수:{{ plc.defect }}개</div> -->
-        <div>
-          <p>양품수 : {{ plc.normal }}개</p>
-        </div>
+         <div class="grid-state2 inline">
+            <h4>양품수</h4>
+            <p> {{ plc.normal }}개</p>
+          </div>
       </div>
     </div>
   </div>
@@ -96,11 +97,11 @@
 import mqtt from 'mqtt'
 import LineChart from '@/components/chart/lineChart'
 import DoughnutExample from './DoughnutExample.js'
-import randomColor from 'randomcolor'
+import randomColor from 'randomcolor';
 
 const options = {
-  responsive: true,
-  maintainAspectRatio: false,
+  responsive: true, 
+  maintainAspectRatio: false, 
   animation: {
     animateRotate: false
   }
@@ -109,8 +110,9 @@ const options = {
 export default {
   components: {
     'line-chart': LineChart,
-    'doughnut-chart': DoughnutExample
+    'doughnut-chart': DoughnutExample,
   },
+
 
   data() {
     return {
@@ -153,7 +155,7 @@ export default {
               }
             }
           ]
-        }
+        },
       },
       chartData2: {
         tagId: 21,
@@ -212,7 +214,7 @@ export default {
       this.today = `${years}/${months}/${dates}`
       document.querySelector('#time').innerHTML = now.toLocaleString('ko-kr')
     }, 10) // 1초마다 함수 실행되도록 설정
-    this.makeChartData2()
+    this.makeChartData2() 
     this.timerInterval2 = setInterval(() => {
       const now = new Date()
       let years = now.getFullYear()
@@ -355,7 +357,7 @@ export default {
         this.chartLabels.shift() // 차트라벨 제거
       }
     },
-    removeOldData2() {
+     removeOldData2() {
       // 현재 차트에 출력할 수가 x개를 넘어서면 제일 오래된 데이터를 제거 한다.
       if (this.maxDataLength - 1 < this.mqttDataList.length) {
         this.mqttDataList.shift() // mqttData제거
@@ -406,7 +408,7 @@ export default {
               label: 'no data',
               backgroundColor: [randomColor(), randomColor()],
               data: [1, 2]
-            }
+            },
           ]
         }
         return
@@ -431,6 +433,7 @@ export default {
     makeDatasetDatas() {
       // 데이터셋의 데이터 추출
       const datasetDatas = []
+
 
       for (let i = 0; i < this.chartDatasetLabels.length; i += 1) {
         const label = this.chartDatasetLabels[i] // label을 하나씩 추출한다.
@@ -458,10 +461,11 @@ export default {
       // 데이터셋의 데이터 추출
       const datasetDatas2 = []
 
+      
       for (let i = 0; i < this.chartDatasetLabels2.length; i += 1) {
         const label2 = this.chartDatasetLabels2[i] // label을 하나씩 추출한다.
         const datas2 = [] // 해당 label에 속한 데이터셋의 데이터 리스트
-        console.log('멀까유', this.chartDatasetLabels2[i]) //양품수
+        console.log('멀까유', this.chartDatasetLabels2[i]); //양품수
 
         // mqtt로 들어온 데이터에서 key값으로 사용된 tag와 현재 label이 같으면 해당 데이터를 추출 한다.
         for (let j = 0; j < this.mqttDataList.length; j += 1) {
@@ -480,7 +484,7 @@ export default {
         const color = idx === 0 ? '#e74c3c' : '#3ce753'
         return { ...item, borderColor: color }
       })
-    }
+    },
     // updateChart () {
     //   this.$refs.skills_chart.update();
     // },
@@ -502,39 +506,39 @@ export default {
   width: 100%;
   grid-template-rows: 7% 92%;
   grid-gap: 3%;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 .grid-time {
   width: 100%;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   grid-gap: 3%;
   padding-bottom: 10%;
 }
 .grid-chart {
   display: grid;
   width: 100%;
-  background-color: blue;
+  /* background-color: blue; */
   grid-template-columns: 70% 30%;
   /* padding-bottom: 10%; */
   /* grid-gap: 3%; */
 }
 .grid-home {
   display: grid;
-  background-color: pink;
+  /* background-color: pink; */
   grid-template-columns: 50% 50%;
 }
 .grid-state {
   display: grid;
   width: 100%;
-  grid-template-rows: 20% 20% 30%;
-  background-color: red;
+  grid-template-rows: 25% 25% 25%;
+  /* background-color: red; */
   grid-gap: 3%;
 }
 .grid-state2 {
   font-size: 15px;
   width: 100%;
   background-color: #eee;
-  border: 5px solid red;
+  /* border: 5px solid red; */
   border-radius: 40px 40px;
 }
 .grid-state3 {
@@ -556,9 +560,10 @@ export default {
 .inline {
   text-align: center;
   align-items: center;
+
 }
 #doughnut {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -11,25 +11,45 @@ class Event {
 
     const eventElement = document.createElement('div')
     eventElement.setAttribute('id', 'mqttpage')
+    eventElement.style.position = 'fixed'
+    eventElement.style.top = '90vh'
+    eventElement.style.left = '25vw'
     const inputAddressElement = eventElement.appendChild(document.createElement('input'))
     inputAddressElement.placeholder = 'MQTT Host 입력'
+    inputAddressElement.style.margin = '3px'
+    inputAddressElement.style.borderRadius = '30px'
+    inputAddressElement.style.textAlign = 'center'
 
     const inputPortElement = eventElement.appendChild(document.createElement('input'))
     inputPortElement.placeholder = 'MQTT Port 입력'
+    inputPortElement.style.margin = '3px'
+    inputPortElement.style.borderRadius = '30px'
+    inputPortElement.style.textAlign = 'center'
+
 
     const inputPathElement = eventElement.appendChild(document.createElement('input'))
     inputPathElement.placeholder = 'MQTT Path 입력'
+    inputPathElement.style.margin = '3px'
+    inputPathElement.style.borderRadius = '30px'
+    inputPathElement.style.textAlign = 'center'
+
 
     const inputTopicElement = eventElement.appendChild(document.createElement('input'))
     inputTopicElement.placeholder = 'MQTT Topic 입력'
+    inputTopicElement.style.margin = '3px'
+    inputTopicElement.style.borderRadius = '30px'
+    inputTopicElement.style.textAlign = 'center'
+
 
     const buttonElement = eventElement.appendChild(document.createElement('button'))
     buttonElement.innerText = 'Connect'
+    buttonElement.style.borderRadius = '30px'
+    buttonElement.style.textAlign = 'center'
 
     const statusElement = eventElement.appendChild(document.createElement('span'))
     statusElement.innerText = '연결'
     statusElement.style.color = 'red'
-
+    
     buttonElement.addEventListener('click', () => {
       let props = {
         hostname: inputAddressElement.value,
