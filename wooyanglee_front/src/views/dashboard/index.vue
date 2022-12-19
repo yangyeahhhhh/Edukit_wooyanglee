@@ -13,12 +13,7 @@
         <div>
           <div class="doughnut2">
             <div class="Chart">
-              <doughnut-chart
-                ref="skills_chart"
-                :chart-data="chartData2"
-                :options="options"
-                style="width: 500px"
-              ></doughnut-chart>
+              <doughnut-chart ref="skills_chart" :chart-data="chartData2" style="width: 500px"></doughnut-chart>
             </div>
           </div>
         </div>
@@ -149,9 +144,12 @@ export default {
           ],
           yAxes: [
             {
-              stacked: false,
-              scaleLabel: {
-                display: true
+              display: true,
+              ticks: {
+                suggestedMin: 0, // minimum will be 0, unless there is a lower value.
+                steps: 5,
+                stepValue: 1,
+                max: 10
               }
             }
           ]
