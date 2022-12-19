@@ -54,10 +54,6 @@ const routes = [
     ]
   },
   {
-    path: '/full',
-    component: () => import('../views/full')
-  },
-  {
     path: '*',
     component: () => import('../components/NotFound.vue'),
     meta: { header: false }
