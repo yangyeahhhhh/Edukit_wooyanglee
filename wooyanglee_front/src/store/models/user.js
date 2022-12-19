@@ -195,7 +195,7 @@ export default {
     actUserUpdate(context, payload) {
       // 상태값 초기화
       context.commit('setUpdatedResult', null)
-
+      console.log('우가우가', payload)
       /* 테스트 데이터 세팅 */
       /*
       setTimeout(() => {
@@ -208,7 +208,8 @@ export default {
       api
         .put(`/serverApi/users/${payload.id}`, payload)
         .then(response => {
-          const updatedResult = response && response.data && response.data.updatedCount
+          console.log('우가웅가2', response)
+          const updatedResult = response.data.updatedCount
           context.commit('setUpdatedResult', updatedResult)
         })
         .catch(error => {

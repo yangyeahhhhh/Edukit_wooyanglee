@@ -60,7 +60,6 @@ export default {
         .then(response => {
           const historyList = response && response.data && response.data.rows
           context.commit('setHistoryList', historyList)
-          console.log('어쩌라구', historyList)
         })
         .catch(error => {
           // 에러인 경우 처리
