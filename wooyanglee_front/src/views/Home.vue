@@ -3,11 +3,12 @@
   <div class="support-grid"></div>
   <div class="band">
     <div class="item-1">
-          <a href="https://design.tutsplus.com/articles/international-artist-feature-malaysia--cms-26852" class="card">
-            <div class="thumb" style="background-image: url(https://i.pinimg.com/564x/36/2a/7d/362a7d9932cdae670c0e4317a430fc32.jpg);"></div>
+          <a href="http://localhost:8081/dashboard" class="card">
+            <div class="thumb" style="background-image: url('@/assets/images/edu.png');"></div> 
+            <!-- 여기 이미지 대시보드로 바꿔야함 -->
             <article>
-              <h1>International Artist Feature: Malaysia</h1>
-              <span>Mary Winkler</span>
+              <h1>대시보드</h1>
+              <span>실시간 차트 확인하기</span>
             </article>
           </a>
     </div>
@@ -15,8 +16,8 @@
           <a href="https://webdesign.tutsplus.com/articles/how-to-conduct-remote-usability-testing--cms-27045" class="card">
             <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/users-2.png);"></div>
             <article>
-              <h1>How to Conduct Remote Usability Testing</h1>
-              <span>Harry Brignull</span>
+              <h1>모니터링</h1>
+              <span>실시간 모니터링 확인하기</span>
             </article>
           </a>
     </div>
@@ -24,9 +25,8 @@
       <a href="https://design.tutsplus.com/articles/envato-tuts-community-challenge-created-by-you-july-edition--cms-26724" class="card">
         <div class="thumb" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/flex-5.jpg);"></div>
         <article>
-          <h1>Created by You, July Edition</h1>
-          <p>Welcome to our monthly feature of fantastic tutorial results created by you, the Envato Tuts+ community! </p>
-          <span>Melody Nieves</span>
+          <h1>작업내역</h1>
+          <span>작업내역 조회하기</span>
         </article>
       </a>
     </div>
